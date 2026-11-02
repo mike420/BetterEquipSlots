@@ -64,13 +64,11 @@
     <Content Include="Package\manifest.json" />
     <Content Include="Package\CHANGELOG.md" />
     <Content Include="Package\README.md" />
-    <Content Include="Package\LICENSE-CDEV" />
     <Content Include="UpdateManifest.ps1" Visible="false" />
     <Content Include="UpdateNexusReadme.ps1" Visible="false" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" Visible="false" />
-    <None Include="README.md" Visible="false" />
     <None Include="Nexus\README.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +146,6 @@ System.IO.File.WriteAllText(ManifestFile, content);
       <PackageFiles Include="$(ProjectDir)\Package\README.md" Condition="Exists('$(ProjectDir)\Package\README.md')" />
       <PackageFiles Include="$(ProjectDir)\Package\manifest.json" Condition="Exists('$(ProjectDir)\Package\manifest.json')" />
       <PackageFiles Include="$(ProjectDir)\Package\icon.png" Condition="Exists('$(ProjectDir)\Package\icon.png')" />
-      <PackageFiles Include="$(ProjectDir)\Package\LICENSE-CDEV" Condition="Exists('$(ProjectDir)\Package\LICENSE-CDEV')" />
     </ItemGroup>
     <MakeDir Directories="$(ThunderPackage)" />
     <Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(ThunderPackage)\plugins" />

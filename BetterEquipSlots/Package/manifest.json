@@ -1,7 +1,7 @@
 {
   "name": "BetterEquipSlots",
-  "description": "Armour, six quick slots, a style tab and your stats on a character sheet beside the inventory. Works with a controller.",
-  "version_number": "1.0.0",
+  "description": "Adds a character sheet beside your inventory: dedicated armour and utility slots, six hotkey quick slots, a style tab to change how your gear looks, and a full stats page. Frees up backpack space and fully supports controllers.",
+  "version_number": "1.0.1",
   "website_url": "https://discord.gg/mnr36G6J4x",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2360",

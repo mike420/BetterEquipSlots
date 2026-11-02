@@ -1,6 +1,6 @@
 [size=6][b]Better Equip Slots[/b][/size]
 
-A character sheet beside the inventory: armour slots, six quick slots, a style for your gear and your stats at a glance. Worn armour no longer takes rows of your backpack, and it all works with a controller.
+Adds a character sheet next to your inventory, with dedicated armour slots, six quick slots, a style tab for your gear and your stats at a glance. Worn armour stops taking up space in your backpack, and everything works with a controller.
 
 
 [size=5][b]Donations[/b][/size]
@@ -17,55 +17,55 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [size=5][b]Incompatibilities[/b][/size]
 
 [list]
-[*]Not for use with EquipmentAndQuickSlots or CDEV.EquipmentSlots (it replaces both, and stays switched off while either is installed).
+[*]Do not use alongside EquipmentAndQuickSlots or CDEV.EquipmentSlots. This mod replaces both and switches itself off if either one is installed.
 [/list]
 
 
 [size=5][b]Features[/b][/size]
 
 [list]
-[*][b]Equipment slots[/b]: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item in to wear it, or out to take it off. Right-click works both ways.
-[*][b]Several utility items[/b] worn at once (up to 5 belts and the like, never two of the same kind), each in its own cell of a window next to the belt slot, their stats and effects all counted. Built in from Equip Multiple Utility Items, which you can remove; its settings carry over.
-[*][b]Six quick slots[/b] for anything, each on any key or key combination ([b]Z[/b] [b]V[/b] [b]B[/b] by default, and the same with [b]Left Alt[/b]), shown on the HUD next to the forsaken power.
-[*][b]Style tab[/b]: choose how your helmet, chest, legs and cape look, from every piece you have ever held, or hide a piece altogether. Looks only: no armour, no weight, no effects. Other players see it too, even without the mod.
-[*][b]Info tab[/b]: health, stamina, eitr and their regeneration, carry weight, the weapon in hand and its damage, armour, block, resistances, the food you have eaten and the effects on you.
-[*][b]Character preview[/b]: drag it to turn your character around and move up and down the body, and zoom in with the mouse wheel. Click to swing the weapon, right-click to block.
-[*][b]Move the panel[/b]: drag it by its frame anywhere on the screen; it stays there (Panel → Offset).
-[*][b]Controller[/b]: D-pad left / right on the hotbar goes on to the quick slots, D-pad up uses one. In the inventory, RB / LB stop on the panel: D-pad to move, A / X / LT / RT as in the inventory, right stick for the tabs.
-[*][b]Padlocks[/b]: a locked inventory cell is never emptied by "stack similar" or by other mods' store and sort buttons.
-[*][b]Ammo[/b]: the next ammo and how many are left above a bow, crossbow or fishing rod on the hotbar, and the next arrows (bolts, bait) put on when the worn ones run out.
-[*][b]Death[/b]: your worn gear lies in the top row of the grave, and *Take All* puts everything back in place and on.
-[*][b]Moving over is painless[/b]: items from EquipmentAndQuickSlots are converted on the first start, and CDEV.EquipmentSlots' slots, styles, locks and settings carry over as they are.
+[*][b]Equipment slots[/b]: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item into a slot to wear it, or drag it out to take it off. Right-clicking also equips and unequips.
+[*][b]Multiple utility items[/b]: wear up to 5 belts and similar items at once (no two of the same kind). Each gets its own cell in a window beside the belt slot, and all of their stats and effects apply. This is built in from Equip Multiple Utility Items, so you can remove that mod; your settings from it carry over.
+[*][b]Six quick slots[/b]: hold anything and bind each slot to any key or key combination ([b]Z[/b], [b]V[/b], [b]B[/b] by default, plus the same keys with [b]Left Alt[/b]). They appear on the HUD next to the Forsaken power.
+[*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Other players see your style even if they don't have the mod.
+[*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour, block, resistances, active food and status effects.
+[*][b]Character preview[/b]: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
+[*][b]Movable panel[/b]: drag the panel by its frame to anywhere on screen and it stays there (Panel → Offset).
+[*][b]Controller support[/b]: on the hotbar, D-pad left / right continues onto the quick slots and D-pad up uses the selected one. In the inventory, RB / LB stop on the panel; use the D-pad to move, A / X / LT / RT work as they do in the inventory, and the right stick switches tabs.
+[*][b]Padlocks[/b]: lock an inventory cell so it is never emptied by "stack similar" or by other mods' store and sort buttons.
+[*][b]Ammo[/b]: shows your next ammo and how much is left above a bow, crossbow or fishing rod on the hotbar, and automatically equips more arrows (bolts, bait) when the current stack runs out.
+[*][b]Death[/b]: your worn gear is placed in the top row of your grave, and [i]Take All[/i] puts everything back where it was and re-equips it.
+[*][b]Easy switching[/b]: items from EquipmentAndQuickSlots are converted the first time you start the game, and CDEV.EquipmentSlots' slots, styles, locks and settings carry over unchanged.
 [/list]
 
 
 [size=5][b]Works with[/b][/size]
 
 [list]
-[*]Better Archery (quiver in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours) and BodyReplacer (your Einherjar look on the character preview).
+[*]Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours) and BodyReplacer (shows your Einherjar body on the character preview).
 [/list]
 
 
 [size=5][b]Configuration[/b][/size]
 
 [list]
-[*]Change settings in game (Configuration Manager or the mod settings menu, F7) or in the config file [b]MagicMike.BetterEquipSlots.cfg[/b].
+[*]Change settings in game (with Configuration Manager or the mod settings menu, F7) or by editing [b]MagicMike.BetterEquipSlots.cfg[/b]. Defaults are shown in brackets.
 [*][b]General Settings[/b]: [b]Enable Plugin[/b] (on; local, needs a restart).
 [*][b]Quick Slots[/b]: [b]Key 1[/b] to [b]Key 6[/b], [b]Alt Modifier[/b] (Left Alt: the HUD shows slots 4-6 while held), [b]Keys Win Over Vanilla[/b] (off), [b]Show Key Conflicts[/b] (on), [b]Gamepad Hotbar[/b] (on).
 [*][b]HUD[/b]: [b]Show Quick Slots[/b] (on), [b]Offset[/b], [b]Spacing[/b] (8).
 [*][b]Ammo[/b]: [b]Show On Hotbar[/b] (on), [b]Auto Equip[/b] (on).
-[*][b]Inventory[/b]: [b]Cell Locks[/b] (on: the padlocks).
+[*][b]Inventory[/b]: [b]Cell Locks[/b] (on; enables the padlocks).
 [*][b]Panel[/b]: [b]Offset[/b], [b]Show Character[/b] (on), [b]Keep Worn In Inventory[/b] (off), [b]Show On Key[/b] (off), [b]Key[/b] (U).
-[*][b]Utility[/b]: [b]Multiple Utility Items[/b] (on: several worn, and their window shown), [b]Max Utility Items[/b] (5, from 2) (set by the server).
-[*][b]Jewelry[/b]: [b]Rings[/b], [b]Earrings[/b], [b]Amulets[/b]: item prefab names worn in those slots (set by the server).
+[*][b]Utility[/b]: [b]Multiple Utility Items[/b] (on; allows wearing several and shows their window), [b]Max Utility Items[/b] (5, minimum 2). Both are set by the server.
+[*][b]Jewelry[/b]: [b]Rings[/b], [b]Earrings[/b], [b]Amulets[/b]: the item prefab names that go in those slots. Set by the server.
 [/list]
 
 
 [size=5][b]Multiplayer[/b][/size]
 
 [list]
-[*]A client mod. A server that has it asks every player for it; servers without it let everyone in.
-[*][b]Before uninstalling[/b], take everything out of the slots: without the mod the game drops it at your feet.
+[*]Install on clients. If a server also has it installed, every player joining needs it too; servers without it let anyone in.
+[*][b]Before uninstalling[/b], empty all the slots. Without the mod, the game drops anything left in them at your feet.
 [/list]
 
 
@@ -82,22 +82,21 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [b]Automatic Install[/b]
 
 [list]
-[*]Plugin is created to be installed with r2modman or Gale.
+[*]Designed to be installed with r2modman or Gale.
 [/list]
-For Nexus downloads you will need to install manually.
+If you downloaded from Nexus, install manually.
 
 [b]Manual Install[/b]
 
 [list]
-[*]Un-zip and drag the [b]plugins[/b] folder into your [b]BepInEx[/b] folder.
+[*]Unzip and drag the [b]plugins[/b] folder into your [b]BepInEx[/b] folder.
 [/list]
 
 
 [size=5][b]Credits[/b][/size]
 
 [list]
-[*]A port of [b]CDEV.EquipmentSlots[/b] by CDEV, used under the MIT licence (included as [b]LICENSE-CDEV[/b]).
-[*]Several utility items built in from [b]Equip Multiple Utility Items[/b] by aedenthorn (public domain).
+[*]Multiple utility items feature built in from [b]Equip Multiple Utility Items[/b] by aedenthorn (public domain).
 [/list]
 
 
