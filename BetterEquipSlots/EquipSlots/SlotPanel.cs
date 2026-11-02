@@ -730,10 +730,12 @@ internal static class SlotPanel
 		float x = Corners[2].x;
 		float num2 = 0f;
 		rectTransform.GetComponentsInChildren(includeInactive: false, Graphics);
+		// The chest panel is a child of the inventory panel; it is not the frame's art, and mods can move it about
+		RectTransform container = gui.m_container;
 		for (int i = 0; i < Graphics.Count; i++)
 		{
 			Graphic graphic = Graphics[i];
-			if (!(graphic == null) && graphic.enabled && (!(s_root != null) || !graphic.transform.IsChildOf(s_root)))
+			if (!(graphic == null) && graphic.enabled && (!(s_root != null) || !graphic.transform.IsChildOf(s_root)) && (!(container != null) || !graphic.transform.IsChildOf(container)))
 			{
 				graphic.rectTransform.GetWorldCorners(Corners);
 				num2 = Mathf.Max(num2, (Corners[2].x - x) / num);

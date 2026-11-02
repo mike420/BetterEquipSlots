@@ -34,7 +34,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Controller support[/b]: on the hotbar, D-pad left / right continues onto the quick slots and D-pad up uses the selected one. In the inventory, RB / LB stop on the panel; use the D-pad to move, A / X / LT / RT work as they do in the inventory, and the right stick switches tabs.
 [*][b]Padlocks[/b]: lock an inventory cell so it is never emptied by "stack similar" or by other mods' store and sort buttons.
 [*][b]Ammo[/b]: shows your next ammo and how much is left above a bow, crossbow or fishing rod on the hotbar, and automatically equips more arrows (bolts, bait) when the current stack runs out.
-[*][b]Death[/b]: your worn gear is placed in the top row of your grave, and [i]Take All[/i] puts everything back where it was and re-equips it.
+[*][b]Death[/b]: your worn gear is placed in the top row of your grave, and *Take All* puts everything back where it was and re-equips it.
 [*][b]Easy switching[/b]: items from EquipmentAndQuickSlots are converted the first time you start the game, and CDEV.EquipmentSlots' slots, styles, locks and settings carry over unchanged.
 [/list]
 

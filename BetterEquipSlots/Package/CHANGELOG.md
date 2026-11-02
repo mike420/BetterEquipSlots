@@ -7,6 +7,14 @@
 </thead>
 <tbody>
   <tr>
+    <td>1.0.2</td>
+    <td>
+    <ul>
+      <li>Added support for draggable panels from ExtraInventorySlots.</li>
+    </ul>
+	</td>
+  </tr>
+  <tr>
     <td>1.0.1</td>
     <td>
     <ul>
