@@ -38,6 +38,9 @@ internal static class MainConfig
 	public static ConfigEntry<bool> showOnKey;
 	public static ConfigEntry<KeyboardShortcut> panelKey;
 
+	public static ConfigEntry<bool> multiUtility;
+	public static ConfigEntry<int> maxUtilityItems;
+
 	public static ConfigEntry<string> rings;
 	public static ConfigEntry<string> earrings;
 	public static ConfigEntry<string> amulets;
@@ -48,6 +51,7 @@ internal static class MainConfig
 	{
 		// (Read before binding: once bound, the file exists)
 		bool newFile = !File.Exists(config.ConfigFilePath);
+		bool newUtility = newFile || !File.ReadAllText(config.ConfigFilePath).Contains("[Utility]");
 
 		modEnabled = config.BindConfigInOrder("General Settings", "Enable Plugin", defaultValue: true, "Enable plugin: the equipment panel, quick slots and the rest. Off: the game as without the mod.\n(Restart required. It is read before connecting to a server, so it is a local setting).\n", synced: false, sectionOrder: true, settingOrder: true);
 
@@ -71,11 +75,14 @@ internal static class MainConfig
 
 		cellLockIcons = config.BindConfigInOrder("Inventory", "Cell Locks", defaultValue: true, "Show a padlock in the bottom left corner of every inventory cell. Click it to lock the cell: its item is then never moved into a chest by a button that empties the inventory - vanilla's \"stack similar\" and QuickStackStore's quick stack, store and sort.", synced: false, sectionOrder: true, settingOrder: true);
 
-		panelOffset = config.BindConfigInOrder("Panel", "Offset", defaultValue: Vector2.zero, "Moves the equipment panel from its place between the inventory and the crafting panel (pixels, x right, y up).", synced: false, sectionOrder: true, settingOrder: true);
+		panelOffset = config.BindConfigInOrder("Panel", "Offset", defaultValue: Vector2.zero, "Moves the equipment panel from its place between the inventory and the crafting panel (pixels, x right, y up). Dragging the panel by its frame sets it too.", synced: false, sectionOrder: true, settingOrder: true);
 		panelCharacter = config.BindConfigInOrder("Panel", "Show Character", defaultValue: true, "Draw your character, as it is dressed right now, behind the equipment slots.", synced: false, sectionOrder: true, settingOrder: true);
 		keepWornInInventory = config.BindConfigInOrder("Panel", "Keep Worn In Inventory", defaultValue: false, "Worn armour, cape, belt, trinket and arrows stay in their inventory cell, as without this mod, and the panel shows them in their slots as well - one item, shown in both places. Off: a worn item moves into its slot and leaves the inventory.", synced: false, sectionOrder: true, settingOrder: true);
 		showOnKey = config.BindConfigInOrder("Panel", "Show On Key", defaultValue: false, "The equipment panel shows only after pressing Key: in the open inventory it shows / hides the panel, with the inventory closed it opens the inventory with the panel. Off: the panel shows whenever the inventory is open.", synced: false, sectionOrder: true, settingOrder: true);
 		panelKey = config.BindConfigInOrder("Panel", "Key", defaultValue: new KeyboardShortcut(KeyCode.U), "The key of the equipment panel when Show On Key is on. Any key, or a key with modifiers such as \"E + LeftAlt\".", synced: false, sectionOrder: true, settingOrder: true);
+
+		multiUtility = config.BindConfigInOrder("Utility", "Multiple Utility Items", defaultValue: true, "Wear several utility items (belts and the like) at once, their stats and effects all counted. The panel shows a window with a cell for each next to the belt slot. Off: one utility item, as in the game, and no window.", synced: true, sectionOrder: true, settingOrder: true);
+		maxUtilityItems = config.BindConfigInOrder("Utility", "Max Utility Items", defaultValue: 5, "How many utility items can be worn at once with Multiple Utility Items on. Never two of the same kind.", synced: true, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(2, 5));
 
 		rings = config.BindConfigInOrder("Jewelry", "Rings", defaultValue: "", "Item prefab names worn in the ring slots, comma-separated.", synced: true, sectionOrder: true, settingOrder: true);
 		earrings = config.BindConfigInOrder("Jewelry", "Earrings", defaultValue: "", "Item prefab names worn in the earring slots, comma-separated.", synced: true, sectionOrder: true, settingOrder: true);
@@ -84,6 +91,10 @@ internal static class MainConfig
 		if (newFile)
 		{
 			ImportCdevConfig(config);
+		}
+		if (newUtility)
+		{
+			ImportMultiUtilityConfig(config);
 		}
 	}
 
@@ -115,6 +126,47 @@ internal static class MainConfig
 		[("Jewelry", "Earrings")] = earrings,
 		[("Jewelry", "Amulets")] = amulets,
 	};
+
+	/// <summary>
+	/// The first time the Utility settings are made, takes Equip Multiple Utility Items' (now built in) from its file, if
+	/// there is one: Enabled and MaxEquippedItems.
+	/// </summary>
+	private static void ImportMultiUtilityConfig(ConfigFile config)
+	{
+		string path = Path.Combine(Paths.ConfigPath, "aedenthorn.EquipMultipleUtilityItems.cfg");
+		if (!File.Exists(path))
+		{
+			return;
+		}
+		try
+		{
+			foreach (string raw in File.ReadAllLines(path))
+			{
+				string line = raw.Trim();
+				int equals = line.IndexOf('=');
+				if (line.StartsWith("#") || equals <= 0)
+				{
+					continue;
+				}
+				string key = line.Substring(0, equals).Trim();
+				string value = line.Substring(equals + 1).Trim();
+				if (key == "Enabled")
+				{
+					multiUtility.SetSerializedValue(value);
+				}
+				else if (key == "MaxEquippedItems")
+				{
+					maxUtilityItems.SetSerializedValue(value);
+				}
+			}
+			config.Save();
+			Jotunn.Logger.LogInfo("[BetterEquipSlots] Took the Utility settings from aedenthorn.EquipMultipleUtilityItems.cfg.");
+		}
+		catch (Exception e)
+		{
+			Jotunn.Logger.LogWarning("[BetterEquipSlots] Could not read aedenthorn.EquipMultipleUtilityItems.cfg: " + e.Message);
+		}
+	}
 
 	/// <summary>
 	/// The first time the mod runs (no config file yet), takes the settings from CDEV.EquipmentSlots' file

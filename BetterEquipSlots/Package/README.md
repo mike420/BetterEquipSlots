@@ -25,9 +25,12 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
 ## 🔥 Features:
 
   * **Equipment slots**: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item in to wear it, or out to take it off. Right-click works both ways.
+  * **Several utility items** worn at once (up to 5 belts and the like, never two of the same kind), each in its own cell of a window next to the belt slot, their stats and effects all counted. Built in from Equip Multiple Utility Items, which you can remove; its settings carry over.
   * **Six quick slots** for anything, each on any key or key combination (`Z` `V` `B` by default, and the same with `Left Alt`), shown on the HUD next to the forsaken power.
   * **Style tab**: choose how your helmet, chest, legs and cape look, from every piece you have ever held, or hide a piece altogether. Looks only: no armour, no weight, no effects. Other players see it too, even without the mod.
   * **Info tab**: health, stamina, eitr and their regeneration, carry weight, the weapon in hand and its damage, armour, block, resistances, the food you have eaten and the effects on you.
+  * **Character preview**: drag it to turn your character around and move up and down the body, and zoom in with the mouse wheel. Click to swing the weapon, right-click to block.
+  * **Move the panel**: drag it by its frame anywhere on the screen; it stays there (Panel → Offset).
   * **Controller**: D-pad left / right on the hotbar goes on to the quick slots, D-pad up uses one. In the inventory, RB / LB stop on the panel: D-pad to move, A / X / LT / RT as in the inventory, right stick for the tabs.
   * **Padlocks**: a locked inventory cell is never emptied by "stack similar" or by other mods' store and sort buttons.
   * **Ammo**: the next ammo and how many are left above a bow, crossbow or fishing rod on the hotbar, and the next arrows (bolts, bait) put on when the worn ones run out.
@@ -38,7 +41,7 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
 
 ## 🤝 Works with:
 
-  * Better Archery (quiver in the ammo slot), Equip Multiple Utility Items (extra utility slots), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours) and BodyReplacer (your Einherjar look on the character preview).
+  * Better Archery (quiver in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours) and BodyReplacer (your Einherjar look on the character preview).
 
 <br>
 
@@ -51,6 +54,7 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
   * **Ammo**: **Show On Hotbar** (on), **Auto Equip** (on).
   * **Inventory**: **Cell Locks** (on: the padlocks).
   * **Panel**: **Offset**, **Show Character** (on), **Keep Worn In Inventory** (off), **Show On Key** (off), **Key** (U).
+  * **Utility**: **Multiple Utility Items** (on: several worn, and their window shown), **Max Utility Items** (5, from 2) (set by the server).
   * **Jewelry**: **Rings**, **Earrings**, **Amulets**: item prefab names worn in those slots (set by the server).
 
 <br>
@@ -84,7 +88,7 @@ For Nexus downloads you will need to install manually.
 
 ## 🙏 Credits:
 
-  * A port of <b>CDEV.EquipmentSlots</b> by CDEV, used under the MIT licence (included as `LICENSE-CDEV`).
+  * Several utility items built in from <b>Equip Multiple Utility Items</b> by aedenthorn (public domain).
 
 <br>
 

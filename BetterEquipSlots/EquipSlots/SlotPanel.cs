@@ -116,6 +116,9 @@ internal static class SlotPanel
 
 	private static Image s_backing;
 
+	// The panel's offset while it's being dragged, saved to the config when it's let go
+	private static Vector2? s_moving;
+
 	private static TMP_Text s_hintTemplate;
 
 	private static TMP_Text s_hintAttack;
@@ -384,7 +387,7 @@ internal static class SlotPanel
 		CreateTabs(gui);
 		LookPicker.Build(s_root, s_backing, s_hintTemplate, s_tooltipPrefab);
 		InfoView.Build(s_root, s_hintTemplate, s_backing, s_titleTemplate);
-		if (MultiUtilityHost.Active)
+		if (MultiUtility.Active)
 		{
 			MoveRepairTab(gui);
 		}
@@ -516,6 +519,35 @@ internal static class SlotPanel
 		return result;
 	}
 
+	internal static void BeginMove()
+	{
+		s_moving = ModConfig.PanelOffset.Value;
+	}
+
+	internal static void Move(Vector2 screenDelta)
+	{
+		if (!s_moving.HasValue || s_root == null || s_root.parent == null)
+		{
+			return;
+		}
+		Vector3 lossyScale = s_root.parent.lossyScale;
+		if (Mathf.Abs(lossyScale.x) < 1E-05f || Mathf.Abs(lossyScale.y) < 1E-05f)
+		{
+			return;
+		}
+		s_moving = s_moving.Value + new Vector2(screenDelta.x / lossyScale.x, screenDelta.y / lossyScale.y);
+	}
+
+	internal static void EndMove()
+	{
+		if (s_moving.HasValue)
+		{
+			Vector2 value = s_moving.Value;
+			s_moving = null;
+			ModConfig.PanelOffset.Value = new Vector2(Mathf.Round(value.x), Mathf.Round(value.y));
+		}
+	}
+
 	private static RectTransform NewWindow(string name, Image art)
 	{
 		GameObject gameObject = new GameObject(name, typeof(RectTransform));
@@ -523,7 +555,8 @@ internal static class SlotPanel
 		rectTransform.SetParent(s_root, worldPositionStays: false);
 		TopLeft(rectTransform);
 		Image image = gameObject.AddComponent<Image>();
-		image.raycastTarget = false;
+		image.raycastTarget = true;
+		gameObject.AddComponent<PanelDrag>();
 		if (art != null)
 		{
 			image.sprite = art.sprite;
@@ -640,7 +673,7 @@ internal static class SlotPanel
 		}
 		try
 		{
-			Vector2 value = ModConfig.PanelOffset.Value;
+			Vector2 value = s_moving ?? ModConfig.PanelOffset.Value;
 			MeasureOverhang(gui);
 			float num = CenteredX(gui);
 			if (float.IsNaN(num) || float.IsInfinity(num) || num < 0f || num > 4000f)
@@ -681,7 +714,7 @@ internal static class SlotPanel
 		float num2 = 40f + gui.m_player.rect.width;
 		float num3 = rectTransform.rect.width - 40f - crafting.rect.width;
 		float num4 = (num2 + num + num3) * 0.5f;
-		float num5 = ((BetterArcheryHost.QuiverActive || MultiUtilityHost.Active) ? (8f + PadLeft + PadRight + s_cellSize) : 0f);
+		float num5 = ((BetterArcheryHost.QuiverActive || MultiUtility.Active) ? (8f + PadLeft + PadRight + s_cellSize) : 0f);
 		return Mathf.Max(num + 8f, num4 - (width + num5) * 0.5f - num2);
 	}
 

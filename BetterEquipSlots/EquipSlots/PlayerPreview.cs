@@ -35,11 +35,37 @@ internal static class PlayerPreview
 
 	private const float BlockSeconds = 0.9f;
 
-	private static float s_yaw = -18f;
+	private static float s_yaw = DefaultYaw;
 
-	private static bool s_returning;
+	// Zoom, 0 the whole body to 1 the head and shoulders, eased towards where the mouse wheel put it
+	private static float s_zoom;
 
-	private const float ReturnSpeed = 6f;
+	private static float s_zoomTarget;
+
+	private static float s_zoomSpeed;
+
+	private const float ZoomPerNotch = 0.2f;
+
+	private const float ZoomSeconds = 0.05f;
+
+	// The camera's distance and the height it looks at, the whole body and zoomed in
+	private const float NearDistance = 1.2f;
+
+	private const float FarHeight = 0.92f;
+
+	private const float NearHeight = 1.55f;
+
+	// Up and down the body, by dragging (m), the height looked at kept between these
+	private static float s_pan;
+
+	private const float PanPerPixel = 0.004f;
+
+	private const float LowestLook = 0.15f;
+
+	private const float HighestLook = 1.85f;
+
+	// Frames without a render after which the panel counts as closed, and the view goes back to the start when it opens
+	private const int ClosedFrames = 2;
 
 	private static VisEquipment s_vis;
 
@@ -76,6 +102,10 @@ internal static class PlayerPreview
 			{
 				return null;
 			}
+			if (Time.frameCount - s_lastFrame > ClosedFrames)
+			{
+				ResetView();
+			}
 			EnsureTexture();
 			s_source = ((Humanoid)player).m_visEquipment;
 			((Humanoid)player).SetupVisEquipment(s_vis, false);
@@ -106,18 +136,15 @@ internal static class PlayerPreview
 
 	internal static void Tick()
 	{
-		if (s_returning)
+		if (s_zoom != s_zoomTarget)
 		{
-			s_yaw = Mathf.LerpAngle(s_yaw, -18f, 1f - Mathf.Exp(-6f * Time.unscaledDeltaTime));
-			if (Mathf.Abs(Mathf.DeltaAngle(s_yaw, -18f)) < 0.1f)
+			s_zoom = Mathf.SmoothDamp(s_zoom, s_zoomTarget, ref s_zoomSpeed, ZoomSeconds, float.PositiveInfinity, Time.unscaledDeltaTime);
+			if (Mathf.Abs(s_zoom - s_zoomTarget) < 0.001f)
 			{
-				s_yaw = -18f;
-				s_returning = false;
+				s_zoom = s_zoomTarget;
+				s_zoomSpeed = 0f;
 			}
-			if (s_model != null)
-			{
-				s_model.rotation = Quaternion.Euler(0f, s_yaw, 0f);
-			}
+			PlaceCamera();
 		}
 		if (s_animator != null && s_blockUntil > 0f && Time.time >= s_blockUntil)
 		{
@@ -174,9 +201,7 @@ internal static class PlayerPreview
 			s_camera.allowHDR = false;
 			s_camera.allowMSAA = false;
 			s_camera.enabled = false;
-			float z = 1.35f / Mathf.Tan(0.2268928f);
-			gameObject3.transform.position = Origin + new Vector3(0f, 0.92f, z);
-			gameObject3.transform.LookAt(Origin + new Vector3(0f, 0.92f, 0f));
+			PlaceCamera();
 			GameObject gameObject4 = new GameObject("Light");
 			gameObject4.transform.SetParent(s_holder.transform, worldPositionStays: false);
 			gameObject4.transform.position = Origin + new Vector3(1.2f, 2.2f, 2.5f);
@@ -266,19 +291,55 @@ internal static class PlayerPreview
 		}
 	}
 
+	// The whole body fits the height of the view at this distance
+	private static float FarDistance => 1.35f / Mathf.Tan(FieldOfView * 0.5f * Mathf.Deg2Rad);
+
+	private static void PlaceCamera()
+	{
+		if (s_camera == null)
+		{
+			return;
+		}
+		// Each notch brings the camera the same share closer, so every one of them is seen
+		float t = s_zoom;
+		float distance = FarDistance * Mathf.Pow(NearDistance / FarDistance, t);
+		float height = Mathf.Lerp(FarHeight, NearHeight, Mathf.InverseLerp(FarDistance, NearDistance, distance));
+		s_pan = Mathf.Clamp(s_pan, LowestLook - height, HighestLook - height);
+		height += s_pan;
+		Transform transform = s_camera.transform;
+		transform.position = Origin + new Vector3(0f, height, distance);
+		transform.LookAt(Origin + new Vector3(0f, height, 0f));
+	}
+
+	internal static void Zoom(float notches)
+	{
+		s_zoomTarget = Mathf.Clamp01(s_zoomTarget + Mathf.Clamp(notches, -1f, 1f) * ZoomPerNotch);
+	}
+
+	internal static void Pan(float pixels)
+	{
+		s_pan -= pixels * PanPerPixel;
+		PlaceCamera();
+	}
+
+	private static void ResetView()
+	{
+		s_zoom = s_zoomTarget = s_zoomSpeed = s_pan = 0f;
+		s_yaw = DefaultYaw;
+		if (s_model != null)
+		{
+			s_model.rotation = Quaternion.Euler(0f, s_yaw, 0f);
+		}
+		PlaceCamera();
+	}
+
 	internal static void Turn(float pixels)
 	{
-		s_returning = false;
 		s_yaw = Mathf.Repeat(s_yaw - pixels * 0.5f + 180f, 360f) - 180f;
 		if (s_model != null)
 		{
 			s_model.rotation = Quaternion.Euler(0f, s_yaw, 0f);
 		}
-	}
-
-	internal static void ReturnToStart()
-	{
-		s_returning = true;
 	}
 
 	private static void Strip(GameObject model)

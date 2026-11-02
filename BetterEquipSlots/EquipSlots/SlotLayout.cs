@@ -122,7 +122,7 @@ internal static class SlotLayout
 	{
 		if (cell.Kind == SlotKind.Belt && cell.Ordinal != 0)
 		{
-			return cell.Ordinal <= MultiUtilityHost.ExtraCells;
+			return cell.Ordinal <= MultiUtility.ExtraCells;
 		}
 		return true;
 	}

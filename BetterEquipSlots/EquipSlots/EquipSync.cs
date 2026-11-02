@@ -222,7 +222,7 @@ internal static class EquipSync
 		{
 			return false;
 		}
-		if (itemData != null && kind == SlotKind.Belt && MultiUtilityHost.Active)
+		if (itemData != null && kind == SlotKind.Belt && MultiUtility.Active)
 		{
 			return false;
 		}

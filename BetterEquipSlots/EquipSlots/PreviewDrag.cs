@@ -3,11 +3,15 @@ using UnityEngine.EventSystems;
 
 namespace BetterEquipSlots.EquipSlots;
 
-internal sealed class PreviewDrag : MonoBehaviour, IBeginDragHandler, IEventSystemHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+internal sealed class PreviewDrag : MonoBehaviour, IBeginDragHandler, IEventSystemHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IScrollHandler
 {
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		PlayerPreview.ReturnToStart();
+	}
+
+	public void OnScroll(PointerEventData eventData)
+	{
+		PlayerPreview.Zoom(eventData.scrollDelta.y);
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
@@ -34,6 +38,7 @@ internal sealed class PreviewDrag : MonoBehaviour, IBeginDragHandler, IEventSyst
 		if (eventData.button == PointerEventData.InputButton.Left || eventData.button == PointerEventData.InputButton.Right)
 		{
 			PlayerPreview.Turn(eventData.delta.x);
+			PlayerPreview.Pan(eventData.delta.y);
 		}
 	}
 }

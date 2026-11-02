@@ -14,7 +14,6 @@ namespace BetterEquipSlots;
 [BepInDependency("com.jotunn.jotunn", BepInDependency.DependencyFlags.HardDependency)]
 [BepInDependency("ishid4.mods.betterarchery", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("goldenrevolver.quick_stack_store", BepInDependency.DependencyFlags.SoftDependency)]
-[BepInDependency("aedenthorn.EquipMultipleUtilityItems", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("LuminairPrime.valheim.localcraftfromstorageprime", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("zenox.betterui", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("randyknapp.mods.epicloot", BepInDependency.DependencyFlags.SoftDependency)]
@@ -69,7 +68,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		Localization.OnLanguageChange = (Action)Delegate.Combine(Localization.OnLanguageChange, new Action(SlotPanel.Invalidate));
 		Plugin.Active = true;
 		BetterArcheryHost.Setup();
-		MultiUtilityHost.Setup();
+		MultiUtility.Setup();
 		harmony = new Harmony(PluginGUID);
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		QuickStackStoreHost.Setup(harmony);
@@ -107,6 +106,15 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 
 		Game.isModded = true;
 		StartLate();
+	}
+
+	// Every plugin's Awake has run by now
+	private void Start()
+	{
+		if (Plugin.Active)
+		{
+			MultiUtility.SwitchOffOldMod();
+		}
 	}
 
 	/// <summary>When the plugin is (re)loaded with a world already running, the slots are set up on what is already there.</summary>
