@@ -19,6 +19,7 @@ namespace BetterEquipSlots;
 [BepInDependency("zenox.betterui", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("randyknapp.mods.epicloot", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("cdev.sleepingplayers", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("MagicMike.BodyReplacer", BepInDependency.DependencyFlags.SoftDependency)]
 [NetworkCompatibility(CompatibilityLevel.ClientMustHaveMod, VersionStrictness.Minor)]
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
@@ -73,6 +74,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		QuickStackStoreHost.Setup(harmony);
 		LocalCraftFromStorageHost.Setup(harmony);
+		BodyReplacerHost.Setup(harmony);
 		BetterUiHost.Setup();
 		EpicLootHost.Setup();
 

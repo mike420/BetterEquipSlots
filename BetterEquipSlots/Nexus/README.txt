@@ -39,7 +39,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [size=5][b]Works with[/b][/size]
 
 [list]
-[*]Better Archery (quiver in the ammo slot), Equip Multiple Utility Items (extra utility slots), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars) and Epic Loot (rarity colours).
+[*]Better Archery (quiver in the ammo slot), Equip Multiple Utility Items (extra utility slots), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours) and BodyReplacer (your Einherjar look on the character preview).
 [/list]
 
 
