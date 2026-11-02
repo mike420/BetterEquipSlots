@@ -1,0 +1,10 @@
+{
+  "name": "BetterEquipSlots",
+  "description": "Armour, six quick slots, a style tab and your stats on a character sheet beside the inventory. Works with a controller.",
+  "version_number": "1.0.0",
+  "website_url": "https://discord.gg/mnr36G6J4x",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2360",
+    "ValheimModding-Jotunn-2.30.2"
+  ]
+}
