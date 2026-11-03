@@ -16,5 +16,7 @@ internal enum SlotKind
 	Quick,
 	Quiver,
 	Stash,
-	Look
+	Look,
+	// Last, so the kinds before it keep their numbers
+	Backpack
 }

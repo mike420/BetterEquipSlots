@@ -38,6 +38,10 @@ internal static class SlotLayout
 
 	internal static readonly List<SlotCell> Look;
 
+	// The backpack of Backpacks or Advanced Backpacks; in row 22 beside the quick slots, and added last so the cells before it
+	// keep their indexes (saved with the items)
+	internal static readonly SlotCell Backpack;
+
 	private static readonly SlotCell[,] ByPos;
 
 	static SlotLayout()
@@ -86,6 +90,7 @@ internal static class SlotLayout
 		{
 			Add(SlotKind.Look, n, 4 + n, 23);
 		}
+		Backpack = Add(SlotKind.Backpack, 0, 6, 22);
 	}
 
 	private static SlotCell Add(SlotKind kind, int ordinal, int x, int y)
@@ -154,7 +159,11 @@ internal static class SlotLayout
 	{
 		if (kind >= SlotKind.Helmet)
 		{
-			return kind <= SlotKind.Ammo;
+			if (kind > SlotKind.Ammo)
+			{
+				return kind == SlotKind.Backpack;
+			}
+			return true;
 		}
 		return false;
 	}
@@ -173,6 +182,10 @@ internal static class SlotLayout
 		if (item?.m_shared == null)
 		{
 			return SlotKind.None;
+		}
+		if (BackpackHost.IsBackpack(item))
+		{
+			return SlotKind.Backpack;
 		}
 		switch (item.m_shared.m_itemType)
 		{

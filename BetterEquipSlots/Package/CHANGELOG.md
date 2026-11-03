@@ -7,6 +7,15 @@
 </thead>
 <tbody>
   <tr>
+    <td>1.0.3</td>
+    <td>
+    <ul>
+      <li>Belt, Trinket and Ammo slots moved to the top of the right column.</li>
+      <li>Added a Backpack slot for Backpacks and Advanced Backpacks; Advanced Backpacks' backpacks are worn beside the belt instead of replacing it.</li>
+    </ul>
+	</td>
+  </tr>
+  <tr>
     <td>1.0.2</td>
     <td>
     <ul>

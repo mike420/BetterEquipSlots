@@ -81,6 +81,17 @@ internal static class SlotPanel
 		(SlotKind.Ammo, 0)
 	};
 
+	private static readonly (SlotKind kind, int ordinal)[] RightWithJewelryAndBackpack = new (SlotKind, int)[7]
+	{
+		(SlotKind.Earring, 0),
+		(SlotKind.Earring, 1),
+		(SlotKind.Amulet, 0),
+		(SlotKind.Ring, 0),
+		(SlotKind.Ring, 1),
+		(SlotKind.Ammo, 0),
+		(SlotKind.Backpack, 0)
+	};
+
 	private static readonly (SlotKind kind, int ordinal)[] LeftPlain = new (SlotKind, int)[4]
 	{
 		(SlotKind.Helmet, 0),
@@ -89,11 +100,20 @@ internal static class SlotPanel
 		(SlotKind.Cape, 0)
 	};
 
+	// Top-aligned beside the armour: belt, trinket and ammo in the first three rows, the backpack (with a backpack mod) under them
 	private static readonly (SlotKind kind, int ordinal)[] RightPlain = new (SlotKind, int)[3]
 	{
 		(SlotKind.Belt, 0),
 		(SlotKind.Trinket, 0),
 		(SlotKind.Ammo, 0)
+	};
+
+	private static readonly (SlotKind kind, int ordinal)[] RightPlainWithBackpack = new (SlotKind, int)[4]
+	{
+		(SlotKind.Belt, 0),
+		(SlotKind.Trinket, 0),
+		(SlotKind.Ammo, 0),
+		(SlotKind.Backpack, 0)
 	};
 
 	private static readonly List<SlotCell> Sheet = new List<SlotCell>();
@@ -1035,13 +1055,14 @@ internal static class SlotPanel
 	private static void BuildSheet(Inventory inventory)
 	{
 		bool flag = Jewelry.AnyKnown || HoldsJewelry(inventory);
+		bool backpack = BackpackHost.Active || SlotInventory.ItemIn(inventory, SlotLayout.Backpack) != null;
 		(SlotKind, int)[] array = (flag ? LeftWithJewelry : LeftPlain);
-		(SlotKind, int)[] array2 = (flag ? RightWithJewelry : RightPlain);
+		(SlotKind, int)[] array2 = (flag ? (backpack ? RightWithJewelryAndBackpack : RightWithJewelry) : (backpack ? RightPlainWithBackpack : RightPlain));
 		s_sheetRows = Mathf.Max(array.Length, array2.Length);
 		Sheet.Clear();
 		SheetPlaces.Clear();
-		AddColumn(array, 0f);
-		AddColumn(array2, 4f);
+		AddColumn(array, 0f, spread: true);
+		AddColumn(array2, 4f, spread: flag);
 		if (LookMode)
 		{
 			for (int i = 0; i < Sheet.Count; i++)
@@ -1060,9 +1081,10 @@ internal static class SlotPanel
 		}
 	}
 
-	private static void AddColumn((SlotKind kind, int ordinal)[] column, float col)
+	// Spread: a shorter column is stretched over the sheet's height; otherwise it keeps one row apart from the top
+	private static void AddColumn((SlotKind kind, int ordinal)[] column, float col, bool spread)
 	{
-		float num = ((column.Length > 1) ? (((float)s_sheetRows - 1f) / (float)(column.Length - 1)) : 0f);
+		float num = ((!spread) ? 1f : ((column.Length > 1) ? (((float)s_sheetRows - 1f) / (float)(column.Length - 1)) : 0f));
 		for (int i = 0; i < column.Length; i++)
 		{
 			Sheet.Add(Find(SlotLayout.Equipment, column[i].kind, column[i].ordinal));
