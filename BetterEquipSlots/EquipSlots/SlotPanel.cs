@@ -975,7 +975,8 @@ internal static class SlotPanel
 		element.m_queued.enabled = false;
 		element.m_noteleport.enabled = false;
 		element.m_food.enabled = false;
-		Sprite sprite = Placeholders.Get(SlotLayout.LookKind(cell));
+		// The Utility panel's cells stay plain, without the faded belt
+		Sprite sprite = (IsExtraBeltCell(cell) ? null : Placeholders.Get(SlotLayout.LookKind(cell)));
 		element.m_icon.enabled = sprite != null;
 		element.m_icon.sprite = sprite;
 		element.m_icon.color = Placeholders.Tint;
@@ -1008,7 +1009,7 @@ internal static class SlotPanel
 			tMP_Text.overflowMode = TextOverflowModes.Ellipsis;
 			tMP_Text.alignment = TextAlignmentOptions.Bottom;
 			tMP_Text.color = SlotNameColor;
-			string text = Localization.instance.Localize(Placeholders.NameKey(SlotLayout.LookKind(cell)));
+			string text = Localization.instance.Localize(IsExtraBeltCell(cell) ? "$cdev_es_utility" : Placeholders.NameKey(SlotLayout.LookKind(cell)));
 			int num = text.IndexOf(':');
 			tMP_Text.text = ((num >= 0 && num + 1 < text.Length) ? text.Substring(num + 1).Trim() : text);
 			RectTransform rectTransform = tMP_Text.rectTransform;

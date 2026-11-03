@@ -12,6 +12,7 @@
     <ul>
       <li>Belt, Trinket and Ammo slots moved to the top of the right column.</li>
       <li>Added a Backpack slot for Backpacks and Advanced Backpacks; Advanced Backpacks' backpacks are worn beside the belt instead of replacing it.</li>
+      <li>The Utility panel's slots are labelled Utility and no longer show a faded belt.</li>
     </ul>
 	</td>
   </tr>
