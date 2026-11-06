@@ -110,7 +110,10 @@ If you downloaded from Nexus, install manually.
 [*][url=https://thunderstore.io/c/valheim/p/MagicMike/ChestPreview/]Chest Preview[/url]
 [*][url=https://thunderstore.io/c/valheim/p/MagicMike/YabbaDabbaDoo/]YabbaDabbaDoo[/url]
 [*][url=https://thunderstore.io/c/valheim/p/MagicMike/BetterBuildMenu/]BetterBuildMenu[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/BetterCraftMenu/]BetterCraftMenu[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/BetterCrafting]BetterCrafting[/url]
+[*][url=https://thunderstore.io/c/valheim/p/MagicMike/ExtraInventorySlots/]ExtraInventorySlots[/url]
+[*][url=https://thunderstore.io/c/valheim/p/MagicMike/VillagePlebs/]VillagePlebs[/url]
+[*][url=https://thunderstore.io/c/valheim/p/MagicMike/BodyReplacer/]BodyReplacer[/url]
 [/list]
 
 
