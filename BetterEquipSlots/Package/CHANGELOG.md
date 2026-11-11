@@ -7,6 +7,14 @@
 </thead>
 <tbody>
   <tr>
+    <td>1.0.4</td>
+    <td>
+    <ul>
+      <li>Updated readme and links.</li>
+    </ul>
+	</td>
+  </tr>
+  <tr>
     <td>1.0.3</td>
     <td>
     <ul>

@@ -42,7 +42,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [size=5][b]Works with[/b][/size]
 
 [list]
-[*]Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), BodyReplacer (shows your Einherjar body on the character preview), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
+[*]Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), Einherjar Bodies (shows your Einherjar body on the character preview), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
 [/list]
 
 
@@ -103,17 +103,18 @@ If you downloaded from Nexus, install manually.
 [size=5][b]Plugins Created by Magic Mike[/b][/size]
 
 [list]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/CoreWoodExtras/]Corewood Extras[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/CorewoodFortified/]Corewood Fortified[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/CorewoodAdditions/]Corewood Additions[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/MyDirtyHoe/]My Dirty Hoe[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/ChestPreview/]Chest Preview[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/YabbaDabbaDoo/]YabbaDabbaDoo[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/BetterBuildMenu/]BetterBuildMenu[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/BetterCrafting]BetterCrafting[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/ExtraInventorySlots/]ExtraInventorySlots[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/VillagePlebs/]VillagePlebs[/url]
-[*][url=https://thunderstore.io/c/valheim/p/MagicMike/BodyReplacer/]BodyReplacer[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CoreWoodExtras]Corewood Extras[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodFortified]Corewood Fortified[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodAdditions]Corewood Additions[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/MyDirtyHoe]My Dirty Hoe[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/ChestPreview]Chest Preview[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/YabbaDabbaDoo]YabbaDabbaDoo[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/BetterBuildMenu]Better Build Menu[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/BetterCrafting]Better Crafting[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/BetterEquipSlots]Better Equip Slots[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/ExtraInventorySlots]Extra Inventory Slots[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/VillagePlebs]Village Plebs[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/EinherjarBodies]Einherjar Bodies[/url]
 [/list]
 
 

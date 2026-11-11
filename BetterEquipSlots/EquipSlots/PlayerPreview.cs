@@ -16,7 +16,7 @@ internal static class PlayerPreview
 
 	private const float DragDegreesPerPixel = 0.5f;
 
-	// Behind a BodyReplacer body, which leaves the texture's alpha as it finds it
+	// Behind an Einherjar Bodies body, which leaves the texture's alpha as it finds it
 	private static readonly Color SolidBackground = new Color(0.11f, 0.1f, 0.09f, 1f);
 
 	private static GameObject s_holder;
@@ -109,8 +109,9 @@ internal static class PlayerPreview
 			EnsureTexture();
 			s_source = ((Humanoid)player).m_visEquipment;
 			((Humanoid)player).SetupVisEquipment(s_vis, false);
+			EinherjarBodiesHost.ShowLookOf(s_vis, s_source);
 			CopyHoldPose(player);
-			s_camera.backgroundColor = (BodyReplacerHost.Drawn(s_model.gameObject) ? SolidBackground : Color.clear);
+			s_camera.backgroundColor = (EinherjarBodiesHost.Drawn(s_model.gameObject) ? SolidBackground : Color.clear);
 			s_camera.enabled = true;
 			s_lastFrame = Time.frameCount;
 			return s_texture;
@@ -122,16 +123,6 @@ internal static class PlayerPreview
 			Destroy();
 			return null;
 		}
-	}
-
-	// The player the preview copy shows, for mods that read a look from the VisEquipment's Player or ZDO
-	internal static VisEquipment SourceOf(VisEquipment vis)
-	{
-		if (vis == null || vis != s_vis || s_source == null)
-		{
-			return null;
-		}
-		return s_source;
 	}
 
 	internal static void Tick()

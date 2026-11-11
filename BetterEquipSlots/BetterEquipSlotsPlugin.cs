@@ -18,12 +18,12 @@ namespace BetterEquipSlots;
 [BepInDependency("zenox.betterui", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("randyknapp.mods.epicloot", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("cdev.sleepingplayers", BepInDependency.DependencyFlags.SoftDependency)]
-[BepInDependency("MagicMike.BodyReplacer", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("MagicMike.EinherjarBodies", BepInDependency.DependencyFlags.SoftDependency)]
 [NetworkCompatibility(CompatibilityLevel.ClientMustHaveMod, VersionStrictness.Minor)]
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
 	public const string PluginName = "BetterEquipSlots";
-	public const string PluginVersion = "1.0.3";
+	public const string PluginVersion = "1.0.4";
 	public const string PluginAuthor = "MagicMike";
 	internal const string PluginGUID = "MagicMike.BetterEquipSlots";
 	internal const string PluginCopy = "Copyright © MagicMike 2026";
@@ -73,7 +73,6 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		QuickStackStoreHost.Setup(harmony);
 		LocalCraftFromStorageHost.Setup(harmony);
-		BodyReplacerHost.Setup(harmony);
 		BetterUiHost.Setup();
 		EpicLootHost.Setup();
 
