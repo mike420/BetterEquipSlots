@@ -7,6 +7,15 @@
 </thead>
 <tbody>
   <tr>
+    <td>1.0.5</td>
+    <td>
+    <ul>
+      <li>Added compatibility with EinherjarBodies.</li>
+      <li>Added compatibility with AzuAutoStore: its favourite borders no longer throw on the slot items, which stopped the inventory window updating (items and extra rows missing, chests not opening).</li>
+    </ul>
+	</td>
+  </tr>
+  <tr>
     <td>1.0.4</td>
     <td>
     <ul>

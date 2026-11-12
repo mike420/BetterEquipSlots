@@ -14,6 +14,7 @@ namespace BetterEquipSlots;
 [BepInDependency("com.jotunn.jotunn", BepInDependency.DependencyFlags.HardDependency)]
 [BepInDependency("ishid4.mods.betterarchery", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("goldenrevolver.quick_stack_store", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("Azumatt.AzuAutoStore", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("LuminairPrime.valheim.localcraftfromstorageprime", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("zenox.betterui", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("randyknapp.mods.epicloot", BepInDependency.DependencyFlags.SoftDependency)]
@@ -23,7 +24,7 @@ namespace BetterEquipSlots;
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
 	public const string PluginName = "BetterEquipSlots";
-	public const string PluginVersion = "1.0.4";
+	public const string PluginVersion = "1.0.5";
 	public const string PluginAuthor = "MagicMike";
 	internal const string PluginGUID = "MagicMike.BetterEquipSlots";
 	internal const string PluginCopy = "Copyright © MagicMike 2026";
@@ -72,6 +73,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		harmony = new Harmony(PluginGUID);
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		QuickStackStoreHost.Setup(harmony);
+		AzuAutoStoreHost.Setup(harmony);
 		LocalCraftFromStorageHost.Setup(harmony);
 		BetterUiHost.Setup();
 		EpicLootHost.Setup();
