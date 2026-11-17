@@ -43,6 +43,8 @@ internal static class SlotPanel
 
 	private static Button s_tabInfo;
 
+	private static readonly Button[] s_loadoutButtons = new Button[Loadouts.Count];
+
 	private static RectTransform s_root;
 
 	private static RectTransform s_cellsRoot;
@@ -269,6 +271,10 @@ internal static class SlotPanel
 		s_root = null;
 		Grid = null;
 		s_tabGear = (s_tabLook = (s_tabInfo = null));
+		for (int i = 0; i < s_loadoutButtons.Length; i++)
+		{
+			s_loadoutButtons[i] = null;
+		}
 		Cells.Clear();
 		CellPositions.Clear();
 	}
@@ -682,6 +688,7 @@ internal static class SlotPanel
 			EquipProgress.Draw(Grid, player);
 			CellLocks.Refresh(Grid, player);
 			GamepadPanel.Update(gui);
+			UpdateLoadouts(player);
 		}
 		catch (Exception arg)
 		{
@@ -832,7 +839,7 @@ internal static class SlotPanel
 		HiddenMark.Show(element.m_icon, show: false);
 		element.m_icon.enabled = true;
 		element.m_icon.sprite = item.GetIcon();
-		element.m_icon.color = ((item == dragItem) ? Color.grey : Color.white);
+		element.m_icon.color = ((item == dragItem) ? Color.grey : (Durability.Low(item) ? new Color(1f, 0.5f, 0.45f, 1f) : Color.white));
 		bool flag = item.m_shared.m_useDurability && item.m_durability < item.GetMaxDurability();
 		element.m_durability.gameObject.SetActive(flag);
 		if (flag)
@@ -1202,6 +1209,7 @@ internal static class SlotPanel
 		InfoView.Place(new Vector2(PadLeft, y), new Vector2(5f * s_space - (s_space - s_cellSize), (float)s_sheetRows * s_space - (s_space - s_cellSize)));
 		InfoView.Show(InfoMode);
 		y += (float)s_sheetRows * s_space;
+		y += PlaceLoadouts(y, num);
 		y = Section(count, SlotKind.Quick, "$cdev_es_quick", y);
 		int num3 = CountCells(count, IsExtraBeltCell);
 		float top = ((num3 > 0) ? (SideWindowHeight(num3) + 8f) : 0f);
@@ -1507,6 +1515,10 @@ internal static class SlotPanel
 			s_tabGear = Tab(gui, "TabEquipment", "$cdev_es_title", PanelTab.Equipment, uITooltip, null);
 			s_tabLook = Tab(gui, "TabAppearance", "$cdev_es_look", PanelTab.Style, uITooltip, "$cdev_es_look_tip");
 			s_tabInfo = Tab(gui, "TabInfo", "$cdev_es_info", PanelTab.Info, uITooltip, "$cdev_es_info_tip");
+			for (int i = 0; i < s_loadoutButtons.Length; i++)
+			{
+				s_loadoutButtons[i] = LoadoutButton(gui, i + 1, uITooltip);
+			}
 		}
 	}
 
@@ -1553,6 +1565,91 @@ internal static class SlotPanel
 			uITooltip.m_text = Localization.instance.Localize(tooltipKey);
 		}
 		return component;
+	}
+
+	private static Button LoadoutButton(InventoryGui gui, int number, UITooltip tooltipTemplate)
+	{
+		Button button = Tab(gui, "Loadout" + number, "Loadout " + number, PanelTab.Equipment, tooltipTemplate, null);
+		button.onClick = new Button.ButtonClickedEvent();
+		button.onClick.AddListener(() =>
+		{
+			Loadouts.OnPanelClick(number, save: false);
+		});
+		button.gameObject.AddComponent<LoadoutRightClick>().Number = number;
+		button.interactable = true;
+		if (tooltipTemplate != null)
+		{
+			UITooltip uITooltip = button.gameObject.AddComponent<UITooltip>();
+			uITooltip.m_tooltipPrefab = tooltipTemplate.m_tooltipPrefab;
+			uITooltip.m_anchor = Grid.m_tooltipAnchor;
+		}
+		return button;
+	}
+
+	/// <summary>Right click on a loadout button saves the current gear to it.</summary>
+	private sealed class LoadoutRightClick : MonoBehaviour, UnityEngine.EventSystems.IPointerClickHandler
+	{
+		internal int Number;
+
+		public void OnPointerClick(UnityEngine.EventSystems.PointerEventData eventData)
+		{
+			if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Right)
+			{
+				Loadouts.OnPanelClick(Number, save: true);
+			}
+		}
+	}
+
+	// The row of loadout buttons under the slots (Equipment tab only); returns the height it takes
+	private static float PlaceLoadouts(float y, float windowWidth)
+	{
+		bool show = s_tab == PanelTab.Equipment && MainConfig.loadoutsEnabled.Value && s_loadoutButtons[0] != null;
+		for (int i = 0; i < s_loadoutButtons.Length; i++)
+		{
+			if (s_loadoutButtons[i] != null)
+			{
+				s_loadoutButtons[i].gameObject.SetActive(show);
+			}
+		}
+		if (!show)
+		{
+			return 0f;
+		}
+		float width = windowWidth - PadLeft - PadRight;
+		float each = (width - 6f * (s_loadoutButtons.Length - 1)) / s_loadoutButtons.Length;
+		for (int j = 0; j < s_loadoutButtons.Length; j++)
+		{
+			Place(s_loadoutButtons[j], PadLeft + j * (each + 6f), y + 2f, each);
+			Label(s_loadoutButtons[j], "Loadout " + (j + 1));
+		}
+		return 34f;
+	}
+
+	// Which loadouts hold something (their label is dimmed when empty) and what each tooltip says
+	private static void UpdateLoadouts(Player player)
+	{
+		for (int i = 0; i < s_loadoutButtons.Length; i++)
+		{
+			Button button = s_loadoutButtons[i];
+			if (button == null || !button.gameObject.activeSelf)
+			{
+				continue;
+			}
+			int number = i + 1;
+			bool exists = Loadouts.Exists(player, number);
+			TMP_Text text = button.GetComponentInChildren<TMP_Text>(includeInactive: true);
+			if (text != null)
+			{
+				text.color = exists ? new Color(1f, 0.85f, 0.5f, 1f) : new Color(0.7f, 0.7f, 0.7f, 0.6f);
+			}
+			UITooltip tooltip = button.GetComponent<UITooltip>();
+			if (tooltip != null)
+			{
+				tooltip.m_topic = "Loadout " + number;
+				string key = QuickSlots.Label(MainConfig.LoadoutKey(number));
+				tooltip.m_text = (exists ? "Left click: put it on.\n" : "Empty.\n") + "Right click: save what you wear and the quick slots now.\nKey: " + key + ", with " + QuickSlots.Label(MainConfig.loadoutSave.Value) + " to save.";
+			}
+		}
 	}
 
 	internal static void StepTab(int step)

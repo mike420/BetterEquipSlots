@@ -38,6 +38,10 @@ internal static class QuickBar
 		internal Image Food;
 
 		internal GameObject PadCursor;
+
+		internal TMP_Text Cooldown;
+
+		internal int ShownCooldown = -1;
 	}
 
 	private static readonly Color AltFrame = new Color(0.35f, 0.65f, 1f, 1f);
@@ -134,6 +138,17 @@ internal static class QuickBar
 			}
 			Corner(widget.Name, new Vector2(1f, 0f), new Vector2(-3f, 2f), TextAlignmentOptions.BottomRight);
 			Corner(widget.Amount, new Vector2(0f, 0f), new Vector2(3f, 2f), TextAlignmentOptions.BottomLeft);
+			if (widget.Name != null)
+			{
+				GameObject gameObject3 = UnityEngine.Object.Instantiate(widget.Name.gameObject, widget.Root, worldPositionStays: false);
+				gameObject3.name = "Cooldown";
+				widget.Cooldown = gameObject3.GetComponent<TMP_Text>();
+				Corner(widget.Cooldown, new Vector2(0.5f, 0.5f), Vector2.zero, TextAlignmentOptions.Center);
+				widget.Cooldown.fontSize = 18f;
+				widget.Cooldown.color = new Color(1f, 0.92f, 0.6f, 1f);
+				widget.Cooldown.raycastTarget = false;
+				widget.Cooldown.text = "";
+			}
 			Widgets[i] = widget;
 		}
 		GameObject gameObject2 = new GameObject("CDEV_QuickSlots", typeof(RectTransform));
@@ -263,8 +278,52 @@ internal static class QuickBar
 				SlotCell slotCell = SlotLayout.QuickCell(num);
 				ItemDrop.ItemData itemAt = ((Humanoid)localPlayer).m_inventory.GetItemAt(slotCell.Pos.x, slotCell.Pos.y);
 				Draw(widget, localPlayer, itemAt, QuickSlots.Label(num), flag2);
+				Cooldown(widget, localPlayer, itemAt);
 				PadCursor(widget, selected == num);
 			}
+		}
+	}
+
+	// The status effect that stops the item being used again: the one it gives, or another of its category, still running
+	private static StatusEffect Blocking(Player player, ItemDrop.ItemData item)
+	{
+		StatusEffect statusEffect = item?.m_shared?.m_consumeStatusEffect;
+		if (!statusEffect)
+		{
+			return null;
+		}
+		int num = statusEffect.NameHash();
+		foreach (StatusEffect statusEffect2 in player.GetSEMan().GetStatusEffects())
+		{
+			if (statusEffect2.NameHash() == num || (statusEffect.m_category.Length > 0 && statusEffect2.m_category == statusEffect.m_category))
+			{
+				return statusEffect2;
+			}
+		}
+		return null;
+	}
+
+	// A potion (or the like) that can't be used yet, because its effect is still running: its icon is dimmed and the time left shown
+	private static void Cooldown(Widget widget, Player player, ItemDrop.ItemData item)
+	{
+		StatusEffect statusEffect = (MainConfig.quickCooldown.Value ? Blocking(player, item) : null);
+		int num = -1;
+		if (statusEffect != null)
+		{
+			num = ((statusEffect.m_ttl > 0f) ? Mathf.CeilToInt(Mathf.Max(0f, statusEffect.GetRemaningTime())) : 0);
+		}
+		if (widget.Icon != null && item != null)
+		{
+			Color color = ((statusEffect != null) ? new Color(0.45f, 0.45f, 0.45f, 1f) : Color.white);
+			if (widget.Icon.color != color)
+			{
+				widget.Icon.color = color;
+			}
+		}
+		if (widget.Cooldown != null && num != widget.ShownCooldown)
+		{
+			widget.ShownCooldown = num;
+			widget.Cooldown.text = ((num > 0) ? StatusEffect.GetTimeString(num) : "");
 		}
 	}
 

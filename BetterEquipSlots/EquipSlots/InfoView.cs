@@ -282,6 +282,13 @@ internal static class InfoView
 		}
 		Header("$cdev_es_info_defense");
 		Line("$item_armor", Number(player.GetBodyArmor()));
+		foreach (ItemDrop.ItemData worn in player.GetInventory().m_inventory)
+		{
+			if (worn.m_equipped && worn.m_shared != null && worn.GetArmor() > 0f && (worn.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Helmet || worn.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Chest || worn.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Legs || worn.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Shoulder))
+			{
+				Line("  " + Localization.instance.Localize(worn.m_shared.m_name), Number(worn.GetArmor()), Plain, raw: true);
+			}
+		}
 		ItemDrop.ItemData currentBlocker = ((Humanoid)player).GetCurrentBlocker();
 		if (currentBlocker != null)
 		{
@@ -324,6 +331,7 @@ internal static class InfoView
 				Label = Localization.instance.Localize("$cdev_es_info_gear")
 			});
 		}
+		CollectSets(player);
 		Header("$cdev_es_info_resist");
 		HitData.DamageModifiers damageModifiers = player.GetDamageModifiers();
 		Resist("$inventory_blunt", damageModifiers.m_blunt);
@@ -369,6 +377,32 @@ internal static class InfoView
 				Header = true,
 				Label = Localization.instance.Localize("$cdev_es_info_effects")
 			});
+		}
+	}
+
+	// Armour sets: how many pieces of each are worn, of how many it takes for the set bonus
+	private static void CollectSets(Player player)
+	{
+		Dictionary<string, int> counts = new Dictionary<string, int>();
+		Dictionary<string, int> sizes = new Dictionary<string, int>();
+		foreach (ItemDrop.ItemData item in player.GetInventory().m_inventory)
+		{
+			if (item.m_equipped && item.m_shared != null && !string.IsNullOrEmpty(item.m_shared.m_setName) && item.m_shared.m_setSize > 1)
+			{
+				string name = item.m_shared.m_setName;
+				counts[name] = (counts.TryGetValue(name, out int have) ? have : 0) + 1;
+				sizes[name] = item.m_shared.m_setSize;
+			}
+		}
+		if (counts.Count == 0)
+		{
+			return;
+		}
+		Header("Set bonuses");
+		foreach (KeyValuePair<string, int> pair in counts)
+		{
+			bool complete = pair.Value >= sizes[pair.Key];
+			Line(Localization.instance.Localize(pair.Key), pair.Value + " / " + sizes[pair.Key], complete ? Good : ValueColor, raw: true);
 		}
 	}
 

@@ -22,10 +22,12 @@ internal static class MainConfig
 	public static ConfigEntry<bool> keysWinOverVanilla;
 	public static ConfigEntry<bool> showKeyConflicts;
 	public static ConfigEntry<bool> gamepadHotbar;
+	public static ConfigEntry<bool> quickRefill;
 
 	public static ConfigEntry<bool> hudEnabled;
 	public static ConfigEntry<Vector2> hudOffset;
 	public static ConfigEntry<float> hudSpacing;
+	public static ConfigEntry<bool> quickCooldown;
 
 	public static ConfigEntry<bool> ammoOnHotbar;
 	public static ConfigEntry<bool> autoEquipAmmo;
@@ -38,6 +40,17 @@ internal static class MainConfig
 	public static ConfigEntry<bool> showOnKey;
 	public static ConfigEntry<KeyboardShortcut> panelKey;
 
+	public static ConfigEntry<bool> loadoutsEnabled;
+	public static ConfigEntry<KeyboardShortcut> loadoutSave;
+	public static ConfigEntry<KeyboardShortcut> loadout1;
+	public static ConfigEntry<KeyboardShortcut> loadout2;
+	public static ConfigEntry<KeyboardShortcut> loadout3;
+	public static ConfigEntry<KeyboardShortcut> loadout4;
+
+	public static ConfigEntry<int> durabilityWarn;
+	public static ConfigEntry<bool> repairAll;
+	public static ConfigEntry<bool> loadoutWeapons;
+
 	public static ConfigEntry<bool> multiUtility;
 	public static ConfigEntry<int> maxUtilityItems;
 
@@ -46,6 +59,18 @@ internal static class MainConfig
 	public static ConfigEntry<string> amulets;
 
 	private const string KeyHelp = " Any key, or a key with modifiers such as \"O + LeftAlt\"; empty: no key.";
+
+	internal static KeyboardShortcut LoadoutKey(int number)
+	{
+		switch (number)
+		{
+		case 1: return loadout1.Value;
+		case 2: return loadout2.Value;
+		case 3: return loadout3.Value;
+		case 4: return loadout4.Value;
+		default: return KeyboardShortcut.Empty;
+		}
+	}
 
 	public static void InitConfigs(ConfigFile config)
 	{
@@ -66,9 +91,13 @@ internal static class MainConfig
 		showKeyConflicts = config.BindConfigInOrder("Quick Slots", "Show Key Conflicts", defaultValue: true, "Show a note under the hotbar (while the inventory is closed) when a quick slot key or the equipment panel key is also used by something else.", synced: false, sectionOrder: true, settingOrder: true);
 		gamepadHotbar = config.BindConfigInOrder("Quick Slots", "Gamepad Hotbar", defaultValue: true, "With a controller: the hotbar's left / right buttons step on past slot 8 onto the six quick slots, and its use button uses the one selected there.", synced: false, sectionOrder: true, settingOrder: true);
 
+		quickRefill = config.BindConfigInOrder("Quick Slots", "Auto Refill", defaultValue: true, "When the last of a stack in a quick slot is used up, the next stack of the same item from your inventory takes its place, so the key keeps working. Never takes from another slot.", synced: false, sectionOrder: true, settingOrder: true);
+
 		hudEnabled = config.BindConfigInOrder("HUD", "Show Quick Slots", defaultValue: true, "Show the quick slots next to the forsaken power.", synced: false, sectionOrder: true, settingOrder: true);
 		hudOffset = config.BindConfigInOrder("HUD", "Offset", defaultValue: Vector2.zero, "Moves the HUD quick slots from their place right of the forsaken power (pixels, x right, y up).", synced: false, sectionOrder: true, settingOrder: true);
 		hudSpacing = config.BindConfigInOrder("HUD", "Spacing", defaultValue: 8f, "Gap between the HUD quick slots.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<float>(0f, 64f));
+
+		quickCooldown = config.BindConfigInOrder("HUD", "Show Cooldown", defaultValue: true, "A potion (or other item with an effect) in a quick slot that cannot be used yet, because its effect or another of its kind is still running: its icon is dimmed and the time left is shown over it.", synced: false, sectionOrder: true, settingOrder: true);
 
 		ammoOnHotbar = config.BindConfigInOrder("Ammo", "Show On Hotbar", defaultValue: true, "Above a bow, crossbow or fishing rod on the hotbar (1-8): the ammo it shoots next and how many of it are left.", synced: false, sectionOrder: true, settingOrder: true);
 		autoEquipAmmo = config.BindConfigInOrder("Ammo", "Auto Equip", defaultValue: true, "When the worn arrows (bolts, bait) run out, put on the next of the same kind, else any other that fits the weapon.", synced: false, sectionOrder: true, settingOrder: true);
@@ -80,6 +109,18 @@ internal static class MainConfig
 		keepWornInInventory = config.BindConfigInOrder("Panel", "Keep Worn In Inventory", defaultValue: false, "Where worn armour, cape, belt, trinket and arrows go.\nOff (default): a worn item moves out of the inventory into its slot on the panel, freeing its inventory cell.\nOn: a worn item stays in its inventory cell, as in the game without this mod, and the panel only shows it in its slot as well - one item in two places, still taking up the inventory cell.\nTo have worn items leave your inventory, keep this off.", synced: false, sectionOrder: true, settingOrder: true);
 		showOnKey = config.BindConfigInOrder("Panel", "Show On Key", defaultValue: false, "The equipment panel shows only after pressing Key: in the open inventory it shows / hides the panel, with the inventory closed it opens the inventory with the panel. Off: the panel shows whenever the inventory is open.", synced: false, sectionOrder: true, settingOrder: true);
 		panelKey = config.BindConfigInOrder("Panel", "Key", defaultValue: new KeyboardShortcut(KeyCode.U), "The key of the equipment panel when Show On Key is on. Any key, or a key with modifiers such as \"E + LeftAlt\".", synced: false, sectionOrder: true, settingOrder: true);
+
+		loadoutsEnabled = config.BindConfigInOrder("Loadouts", "Enable Loadouts", defaultValue: true, "Four saved sets of worn gear and quick slot items per character. Press a loadout's key to put it on; hold Save Modifier with the key to save what you wear now. Items are found by kind in your inventory.", synced: false, sectionOrder: true, settingOrder: true);
+		loadoutSave = config.BindConfigInOrder("Loadouts", "Save Modifier", defaultValue: new KeyboardShortcut(KeyCode.LeftShift), "Hold this with a loadout's key to save the current gear to it instead of putting it on. Empty: loadouts cannot be saved by key.", synced: false, sectionOrder: true, settingOrder: true);
+		loadout1 = config.BindConfigInOrder("Loadouts", "Key 1", defaultValue: new KeyboardShortcut(KeyCode.Keypad1), "Puts on loadout 1." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
+		loadout2 = config.BindConfigInOrder("Loadouts", "Key 2", defaultValue: new KeyboardShortcut(KeyCode.Keypad2), "Puts on loadout 2." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
+		loadout3 = config.BindConfigInOrder("Loadouts", "Key 3", defaultValue: new KeyboardShortcut(KeyCode.Keypad3), "Puts on loadout 3." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
+		loadout4 = config.BindConfigInOrder("Loadouts", "Key 4", defaultValue: new KeyboardShortcut(KeyCode.Keypad4), "Puts on loadout 4." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
+
+		loadoutWeapons = config.BindConfigInOrder("Loadouts", "Include Weapons", defaultValue: true, "A loadout also remembers what is in your hands (weapon, shield, tool), so it swaps weapon sets too. A loadout saved with empty hands unequips them. Off: loadouts leave your hands alone.", synced: false, sectionOrder: true, settingOrder: true);
+
+		durabilityWarn = config.BindConfigInOrder("Durability", "Warn Below", defaultValue: 20, "Worn gear at or below this durability (percent) gets a red tint on the equipment panel, and a message warns once when it drops there. 0: off.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(0, 100));
+		repairAll = config.BindConfigInOrder("Durability", "Repair All At Once", defaultValue: true, "At a workbench the repair button repairs every item that can be repaired, not just one per press.", synced: false, sectionOrder: true, settingOrder: true);
 
 		multiUtility = config.BindConfigInOrder("Utility", "Multiple Utility Items", defaultValue: true, "Wear several utility items (belts and the like) at once, their stats and effects all counted. The panel shows a window with a cell for each next to the belt slot. Off: one utility item, as in the game, and no window.", synced: true, sectionOrder: true, settingOrder: true);
 		maxUtilityItems = config.BindConfigInOrder("Utility", "Max Utility Items", defaultValue: 5, "How many utility items can be worn at once with Multiple Utility Items on. Never two of the same kind.", synced: true, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(2, 5));

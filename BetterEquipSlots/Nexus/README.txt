@@ -26,12 +26,14 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [list]
 [*][b]Equipment slots[/b]: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item into a slot to wear it, or drag it out to take it off. Right-clicking also equips and unequips.
 [*][b]Multiple utility items[/b]: wear up to 5 belts and similar items at once (no two of the same kind). Each gets its own cell in a window beside the belt slot, and all of their stats and effects apply. This is built in from Equip Multiple Utility Items, so you can remove that mod; your settings from it carry over.
-[*][b]Six quick slots[/b]: hold anything and bind each slot to any key or key combination ([b]Z[/b], [b]V[/b], [b]B[/b] by default, plus the same keys with [b]Left Alt[/b]). They appear on the HUD next to the Forsaken power.
+[*][b]Six quick slots[/b]: hold anything and bind each slot to any key or key combination ([b]Z[/b], [b]V[/b], [b]B[/b] by default, plus the same keys with [b]Left Alt[/b]). They appear on the HUD next to the Forsaken power, with the stack size (when a stack runs out the next one from your inventory takes its place), and a potion that can't be used yet is dimmed with the time left over it.
 [*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Other players see your style even if they don't have the mod.
-[*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour, block, resistances, active food and status effects.
+[*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour (per worn piece), armour set bonuses, block, resistances, active food and status effects.
 [*][b]Character preview[/b]: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
 [*][b]Movable panel[/b]: drag the panel by its frame to anywhere on screen and it stays there (Panel → Offset).
 [*][b]Controller support[/b]: on the hotbar, D-pad left / right continues onto the quick slots and D-pad up uses the selected one. In the inventory, RB / LB stop on the panel; use the D-pad to move, A / X / LT / RT work as they do in the inventory, and the right stick switches tabs.
+[*][b]Loadouts[/b]: four saved sets of worn gear and quick slot items. Left click a button under your character on the Equipment tab to put a loadout on, right click to save what you wear now to it. Each also has a key (Keypad 1 to Keypad 4 by default; hold Left Shift with it to save). A loadout also remembers your weapon and shield, so it swaps weapon sets too. Items are found in your inventory by kind, preferring the same quality and the best repair; slots the loadout leaves empty are emptied, and missing items are reported.
+[*][b]Durability[/b]: worn gear that is nearly broken is tinted red on the panel and you get a warning message once. At a workbench the repair button repairs everything repairable in one press.
 [*][b]Padlocks[/b]: lock an inventory cell so it is never emptied by "stack similar" or by other mods' store and sort buttons.
 [*][b]Ammo[/b]: shows your next ammo and how much is left above a bow, crossbow or fishing rod on the hotbar, and automatically equips more arrows (bolts, bait) when the current stack runs out.
 [*][b]Death[/b]: your worn gear is placed in the top row of your grave, and *Take All* puts everything back where it was and re-equips it.
@@ -51,9 +53,11 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [list]
 [*]Change settings in game (with Configuration Manager or the mod settings menu, F7) or by editing [b]MagicMike.BetterEquipSlots.cfg[/b]. Defaults are shown in brackets.
 [*][b]General Settings[/b]: [b]Enable Plugin[/b] (on; local, needs a restart).
-[*][b]Quick Slots[/b]: [b]Key 1[/b] to [b]Key 6[/b], [b]Alt Modifier[/b] (Left Alt: the HUD shows slots 4-6 while held), [b]Keys Win Over Vanilla[/b] (off), [b]Show Key Conflicts[/b] (on), [b]Gamepad Hotbar[/b] (on).
-[*][b]HUD[/b]: [b]Show Quick Slots[/b] (on), [b]Offset[/b], [b]Spacing[/b] (8).
+[*][b]Quick Slots[/b]: [b]Auto Refill[/b] (on), [b]Key 1[/b] to [b]Key 6[/b], [b]Alt Modifier[/b] (Left Alt: the HUD shows slots 4-6 while held), [b]Keys Win Over Vanilla[/b] (off), [b]Show Key Conflicts[/b] (on), [b]Gamepad Hotbar[/b] (on).
+[*][b]HUD[/b]: [b]Show Quick Slots[/b] (on), [b]Offset[/b], [b]Spacing[/b] (8), [b]Show Cooldown[/b] (on).
 [*][b]Ammo[/b]: [b]Show On Hotbar[/b] (on), [b]Auto Equip[/b] (on).
+[*][b]Loadouts[/b]: [b]Enable Loadouts[/b] (on), [b]Save Modifier[/b] (Left Shift), [b]Key 1[/b] to [b]Key 4[/b] (Keypad 1 to 4), [b]Include Weapons[/b] (on).
+[*][b]Durability[/b]: [b]Warn Below[/b] (20 percent, 0 is off), [b]Repair All At Once[/b] (on).
 [*][b]Inventory[/b]: [b]Cell Locks[/b] (on; enables the padlocks).
 [*][b]Panel[/b]: [b]Offset[/b], [b]Show Character[/b] (on), [b]Keep Worn In Inventory[/b] (off), [b]Show On Key[/b] (off), [b]Key[/b] (U).
 [*][b]Utility[/b]: [b]Multiple Utility Items[/b] (on; allows wearing several and shows their window), [b]Max Utility Items[/b] (5, minimum 2). Both are set by the server.

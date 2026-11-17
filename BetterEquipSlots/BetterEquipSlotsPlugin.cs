@@ -24,7 +24,7 @@ namespace BetterEquipSlots;
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
 	public const string PluginName = "BetterEquipSlots";
-	public const string PluginVersion = "1.0.5";
+	public const string PluginVersion = "1.0.7";
 	public const string PluginAuthor = "MagicMike";
 	internal const string PluginGUID = "MagicMike.BetterEquipSlots";
 	internal const string PluginCopy = "Copyright © MagicMike 2026";
@@ -141,8 +141,11 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		if (Plugin.Active)
 		{
 			QuickSlots.Tick();
+			Loadouts.Tick();
 			SlotPanel.TickKey();
 			AmmoRefill.Tick();
+			QuickRefill.Tick();
+			Durability.Tick();
 			KeyConflicts.Tick();
 			EquipSync.Tick();
 			QuickBar.Tick();
