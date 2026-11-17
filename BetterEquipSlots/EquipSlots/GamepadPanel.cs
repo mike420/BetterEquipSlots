@@ -231,12 +231,19 @@ internal static class GamepadPanel
 		{
 			return;
 		}
-		Cursor = Mathf.Clamp(Cursor, 0, cellCount - 1);
+		// The cells, then the loadout buttons under them
+		int total = cellCount + SlotPanel.LoadoutPadCount;
+		int clamped = Mathf.Clamp(Cursor, 0, total - 1);
+		if (clamped != Cursor)
+		{
+			Cursor = clamped;
+			SelectCursor();
+		}
 		for (int i = 0; i < Directions.Length; i++)
 		{
 			if (ZInput.GetButtonDown(DirectionButtons[i][0]) || ZInput.GetButtonDown(DirectionButtons[i][1]))
 			{
-				int num2 = Nearest(Cursor, Directions[i], cellCount);
+				int num2 = Nearest(Cursor, Directions[i], total);
 				if (num2 >= 0)
 				{
 					Cursor = num2;
@@ -244,6 +251,20 @@ internal static class GamepadPanel
 				}
 				break;
 			}
+		}
+		if (Cursor >= cellCount)
+		{
+			// A loadout button: A puts it on, X saves to it (as left and right click)
+			int loadout = Cursor - cellCount + 1;
+			if (ZInput.GetButtonDown("JoyButtonA"))
+			{
+				Loadouts.OnPanelClick(loadout, save: false);
+			}
+			else if (ZInput.GetButtonDown("JoyButtonX"))
+			{
+				Loadouts.OnPanelClick(loadout, save: true);
+			}
+			return;
 		}
 		InventoryGrid grid = SlotPanel.Grid;
 		SlotCell slotCell = SlotPanel.CellAt(Cursor);
@@ -284,7 +305,7 @@ internal static class GamepadPanel
 
 	private static int Nearest(int from, Vector2 direction, int count)
 	{
-		Vector2 vector = SlotPanel.CellPlace(from);
+		Vector2 vector = SlotPanel.NavPoint(from);
 		int result = -1;
 		float num = float.MaxValue;
 		for (int i = 0; i < count; i++)
@@ -293,7 +314,7 @@ internal static class GamepadPanel
 			{
 				continue;
 			}
-			Vector2 lhs = SlotPanel.CellPlace(i) - vector;
+			Vector2 lhs = SlotPanel.NavPoint(i) - vector;
 			float num2 = Vector2.Dot(lhs, direction);
 			if (!(num2 < 1f))
 			{
@@ -312,6 +333,11 @@ internal static class GamepadPanel
 	private static void SelectCursor()
 	{
 		InventoryGrid grid = SlotPanel.Grid;
+		if (grid != null && Cursor >= SlotPanel.CellCount && Cursor < SlotPanel.CellCount + SlotPanel.LoadoutPadCount)
+		{
+			SlotPanel.LoadoutSelectable(Cursor - SlotPanel.CellCount)?.Select();
+			return;
+		}
 		if (!(grid == null) && Cursor >= 0 && Cursor < grid.m_elements.Count && !(grid.m_elements[Cursor] == null))
 		{
 			Selectable component = grid.m_elements[Cursor].GetComponent<Selectable>();

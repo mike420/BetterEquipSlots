@@ -47,6 +47,11 @@ internal static class SlotPanel
 
 	private static readonly string[] s_loadoutState = new string[Loadouts.Count];
 
+	// Centre of each loadout button in the panel (x right, y down, as the cells' places), for the controller's cursor
+	private static readonly Vector2[] s_loadoutCenters = new Vector2[Loadouts.Count];
+
+	private static int s_loadoutShown;
+
 	private static RectTransform s_root;
 
 	private static RectTransform s_cellsRoot;
@@ -248,6 +253,26 @@ internal static class SlotPanel
 			return null;
 		}
 		return Cells[index];
+	}
+
+	// The loadout buttons as extra targets of the controller's cursor, after the cells
+	internal static int LoadoutPadCount => s_loadoutShown;
+
+	// The middle of a cell, or of a loadout button (index past the cells), in the panel
+	internal static Vector2 NavPoint(int index)
+	{
+		int cells = CellCount;
+		if (index < cells)
+		{
+			return CellPlace(index) + new Vector2(s_cellSize * 0.5f, s_cellSize * 0.5f);
+		}
+		int button = index - cells;
+		return (button >= 0 && button < s_loadoutCenters.Length) ? s_loadoutCenters[button] : Vector2.zero;
+	}
+
+	internal static Selectable LoadoutSelectable(int button)
+	{
+		return (button >= 0 && button < s_loadoutButtons.Length) ? s_loadoutButtons[button] : null;
 	}
 
 	internal static Vector2 CellPlace(int index)
@@ -1616,15 +1641,18 @@ internal static class SlotPanel
 				s_loadoutButtons[i].gameObject.SetActive(show);
 			}
 		}
+		s_loadoutShown = 0;
 		if (!show)
 		{
 			return 0f;
 		}
+		s_loadoutShown = s_loadoutButtons.Length;
 		float width = windowWidth - PadLeft - PadRight;
 		float each = (width - 6f * (s_loadoutButtons.Length - 1)) / s_loadoutButtons.Length;
 		for (int j = 0; j < s_loadoutButtons.Length; j++)
 		{
 			Place(s_loadoutButtons[j], PadLeft + j * (each + 6f), y + 2f, each);
+			s_loadoutCenters[j] = new Vector2(PadLeft + j * (each + 6f) + each * 0.5f, y + 2f + 14f);
 			Label(s_loadoutButtons[j], Texts.Get(Texts.Loadout, (j + 1).ToString()));
 		}
 		return 34f;
