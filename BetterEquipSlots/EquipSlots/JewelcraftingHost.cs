@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using BepInEx.Bootstrap;
+using HarmonyLib;
 
 namespace BetterEquipSlots.EquipSlots;
 
@@ -18,6 +20,8 @@ internal static class JewelcraftingHost
 	private const string NecklacePrefix = "$jc_necklace_";
 
 	private static bool s_loaded;
+
+	private static bool s_backgroundErrorLogged;
 
 	private static BepInEx.Configuration.ConfigEntryBase s_ringSlot;
 
@@ -61,6 +65,79 @@ internal static class JewelcraftingHost
 		{
 			Plugin.Log.LogWarning("Could not read Jewelcrafting's ring and necklace settings (they are taken as on): " + ex.Message);
 		}
+	}
+
+	/// <summary>
+	/// Jewelcrafting colours the cell of every item in the player's inventory by that item's grid position (row * width +
+	/// column). The slot items sit far below the grid (from row 20), so the lookup finds no cell and throws on every frame the
+	/// inventory is open, which stops the inventory window updating. As with AzuAutoStore, the slot items are taken out of the
+	/// list while it colours the cells and put back after, and the slot panel's own grid is left out.
+	/// </summary>
+	internal static void Guard(Harmony harmony)
+	{
+		if (harmony == null || !Chainloader.PluginInfos.TryGetValue(Guid, out var info) || info.Instance == null)
+		{
+			return;
+		}
+		try
+		{
+			Assembly assembly = info.Instance.GetType().Assembly;
+			MethodInfo postfix = assembly.GetType("Jewelcrafting.SocketsBackground+ColorBackgroundInventory")?.GetMethod("Postfix", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+			if (postfix == null || postfix.GetParameters().Length != 1)
+			{
+				Plugin.Log.LogWarning($"Jewelcrafting {info.Metadata.Version}: its cell colouring was not found; if it throws, the inventory window stops updating.");
+				return;
+			}
+			harmony.Patch(postfix, new HarmonyMethod(typeof(JewelcraftingHost), nameof(BackgroundsBefore)), null, null, new HarmonyMethod(typeof(JewelcraftingHost), nameof(BackgroundsAfter)), null);
+		}
+		catch (Exception ex)
+		{
+			Plugin.Log.LogWarning("Could not guard Jewelcrafting's cell colouring: " + ex.Message);
+		}
+	}
+
+	// __0 the grid
+	private static bool BackgroundsBefore(InventoryGrid __0, out List<KeyValuePair<int, ItemDrop.ItemData>> __state)
+	{
+		__state = null;
+		if (!Plugin.Active || __0 == null || __0.m_inventory == null)
+		{
+			return true;
+		}
+		if (SlotPanel.IsPanelGrid(__0))
+		{
+			return false;
+		}
+		int height = __0.m_inventory.GetHeight();
+		List<ItemDrop.ItemData> items = __0.m_inventory.m_inventory;
+		for (int i = items.Count - 1; i >= 0; i--)
+		{
+			if (items[i] != null && items[i].m_gridPos.y >= height)
+			{
+				(__state ??= new List<KeyValuePair<int, ItemDrop.ItemData>>()).Add(new KeyValuePair<int, ItemDrop.ItemData>(i, items[i]));
+				items.RemoveAt(i);
+			}
+		}
+		return true;
+	}
+
+	// A finalizer, so the items are always put back, and anything it still throws does not stop the window
+	private static Exception BackgroundsAfter(Exception __exception, InventoryGrid __0, List<KeyValuePair<int, ItemDrop.ItemData>> __state)
+	{
+		if (__state != null && __0?.m_inventory != null)
+		{
+			List<ItemDrop.ItemData> items = __0.m_inventory.m_inventory;
+			for (int i = __state.Count - 1; i >= 0; i--)
+			{
+				items.Insert(Math.Min(__state[i].Key, items.Count), __state[i].Value);
+			}
+		}
+		if (__exception != null && !s_backgroundErrorLogged)
+		{
+			s_backgroundErrorLogged = true;
+			Plugin.Log.LogWarning("Jewelcrafting's cell colouring failed (ignored, so the inventory window keeps updating; logged once): " + __exception);
+		}
+		return null;
 	}
 
 	internal static bool IsRing(ItemDrop.ItemData item)

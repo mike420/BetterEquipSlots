@@ -75,6 +75,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		QuickStackStoreHost.Setup(harmony);
 		AzuAutoStoreHost.Setup(harmony);
+		JewelcraftingHost.Guard(harmony);
 		LocalCraftFromStorageHost.Setup(harmony);
 		BetterUiHost.Setup();
 		EpicLootHost.Setup();
