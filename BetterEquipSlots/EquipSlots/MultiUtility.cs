@@ -96,7 +96,7 @@ internal static class MultiUtility
 
 	private static bool IsUtility(ItemDrop.ItemData item)
 	{
-		return item != null && item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Utility && !Jewelry.IsJewelry(item) && !BackpackHost.IsAdvanced(item);
+		return item != null && item.m_shared.m_itemType == ItemDrop.ItemData.ItemType.Utility && !Jewelry.IsJewelry(item) && !BackpackHost.IsAdvanced(item) && !JewelcraftingHost.IsWornByIt(item);
 	}
 
 	// The worn utility items besides the game's own one

@@ -398,7 +398,7 @@ internal static class InfoView
 		{
 			return;
 		}
-		Header("Set bonuses");
+		Header(Texts.InfoSets);
 		foreach (KeyValuePair<string, int> pair in counts)
 		{
 			bool complete = pair.Value >= sizes[pair.Key];

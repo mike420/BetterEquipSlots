@@ -150,6 +150,10 @@ internal static class SlotInventory
 		SlotCell slotCell = null;
 		foreach (SlotCell item2 in SlotLayout.CellsOf(kind))
 		{
+			if (JewelcraftingHost.IsWornByIt(item) && item2.Ordinal > 0)
+			{
+				continue;
+			}
 			ItemDrop.ItemData itemData = ItemIn(inventory, item2);
 			if (itemData == item || itemData == null)
 			{

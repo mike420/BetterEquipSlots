@@ -36,6 +36,8 @@ internal static class MainConfig
 
 	public static ConfigEntry<Vector2> panelOffset;
 	public static ConfigEntry<bool> panelCharacter;
+	public static ConfigEntry<string> hiddenSlots;
+	public static ConfigEntry<EquipSlots.PanelPreset> panelPreset;
 	public static ConfigEntry<bool> keepWornInInventory;
 	public static ConfigEntry<bool> showOnKey;
 	public static ConfigEntry<KeyboardShortcut> panelKey;
@@ -106,6 +108,8 @@ internal static class MainConfig
 
 		panelOffset = config.BindConfigInOrder("Panel", "Offset", defaultValue: Vector2.zero, "Moves the equipment panel from its place between the inventory and the crafting panel (pixels, x right, y up). Dragging the panel by its frame sets it too.", synced: false, sectionOrder: true, settingOrder: true);
 		panelCharacter = config.BindConfigInOrder("Panel", "Show Character", defaultValue: true, "Draw your character, as it is dressed right now, behind the equipment slots.", synced: false, sectionOrder: true, settingOrder: true);
+		hiddenSlots = config.BindConfigInOrder("Panel", "Hidden Slots", defaultValue: "", "Slots left out of the panel while they are empty, comma-separated: Helmet, Chest, Legs, Cape, Belt, Trinket, Ammo, Ring, Earring, Amulet, Backpack. A slot that holds an item is always shown.", synced: false, sectionOrder: true, settingOrder: true);
+		panelPreset = config.BindConfigInOrder("Panel", "Preset", defaultValue: EquipSlots.PanelPreset.Custom, "Pick one to set Hidden Slots and Show Character in one go, then it goes back to Custom. Full: every slot. Compact: armour and belt only (a slot with an item still shows). Minimal: helmet, chest and legs, no character.", synced: false, sectionOrder: true, settingOrder: true);
 		keepWornInInventory = config.BindConfigInOrder("Panel", "Keep Worn In Inventory", defaultValue: false, "Where worn armour, cape, belt, trinket and arrows go.\nOff (default): a worn item moves out of the inventory into its slot on the panel, freeing its inventory cell.\nOn: a worn item stays in its inventory cell, as in the game without this mod, and the panel only shows it in its slot as well - one item in two places, still taking up the inventory cell.\nTo have worn items leave your inventory, keep this off.", synced: false, sectionOrder: true, settingOrder: true);
 		showOnKey = config.BindConfigInOrder("Panel", "Show On Key", defaultValue: false, "The equipment panel shows only after pressing Key: in the open inventory it shows / hides the panel, with the inventory closed it opens the inventory with the panel. Off: the panel shows whenever the inventory is open.", synced: false, sectionOrder: true, settingOrder: true);
 		panelKey = config.BindConfigInOrder("Panel", "Key", defaultValue: new KeyboardShortcut(KeyCode.U), "The key of the equipment panel when Show On Key is on. Any key, or a key with modifiers such as \"E + LeftAlt\".", synced: false, sectionOrder: true, settingOrder: true);

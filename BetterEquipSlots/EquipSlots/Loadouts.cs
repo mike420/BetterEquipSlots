@@ -119,7 +119,7 @@ internal static class Loadouts
 			}
 		}
 		player.m_customData[StoreKey(number)] = sb.ToString();
-		player.Message(MessageHud.MessageType.Center, "Loadout " + number + " saved (" + saved + " items)");
+		player.Message(MessageHud.MessageType.Center, Texts.Get(Texts.LoadoutSaved, number.ToString(), saved.ToString()));
 	}
 
 	private static void AppendHand(StringBuilder sb, int cell, ItemDrop.ItemData item, ref int saved)
@@ -172,7 +172,7 @@ internal static class Loadouts
 	{
 		if (!Exists(player, number))
 		{
-			player.Message(MessageHud.MessageType.Center, "Loadout " + number + " is empty: right click its button (or hold " + QuickSlots.Label(MainConfig.loadoutSave.Value) + " with its key) to save the current gear");
+			player.Message(MessageHud.MessageType.Center, Texts.Get(Texts.LoadoutEmpty, number.ToString(), QuickSlots.Label(MainConfig.loadoutSave.Value)));
 			return;
 		}
 		Inventory inventory = ((Humanoid)player).m_inventory;
@@ -290,14 +290,14 @@ internal static class Loadouts
 		inventory.Changed(false, false);
 		EquipSync.MarkDirty();
 
-		string message = "Loadout " + number + " applied";
+		string message = Texts.Get(Texts.LoadoutApplied, number.ToString());
 		if (missing > 0)
 		{
-			message += ", " + missing + " item(s) not found";
+			message += Texts.Get(Texts.LoadoutMissing, missing.ToString());
 		}
 		if (failed > 0)
 		{
-			message += ", " + failed + " could not be moved (inventory full)";
+			message += Texts.Get(Texts.LoadoutFull, failed.ToString());
 		}
 		player.Message(MessageHud.MessageType.Center, message);
 	}

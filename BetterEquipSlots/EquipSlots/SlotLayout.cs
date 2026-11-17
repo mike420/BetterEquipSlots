@@ -187,6 +187,11 @@ internal static class SlotLayout
 		{
 			return SlotKind.Backpack;
 		}
+		SlotKind jewelcrafting = JewelcraftingHost.KindOf(item);
+		if (jewelcrafting != SlotKind.None)
+		{
+			return jewelcrafting;
+		}
 		switch (item.m_shared.m_itemType)
 		{
 		case ItemDrop.ItemData.ItemType.Helmet:
@@ -245,6 +250,11 @@ internal static class SlotLayout
 		default:
 			if (HomeKind(item) == cell.Kind)
 			{
+				// Jewelcrafting has one finger slot: its ring only goes in the first Ring cell
+				if (cell.Ordinal > 0 && JewelcraftingHost.IsWornByIt(item))
+				{
+					return false;
+				}
 				return IsOpen(cell);
 			}
 			return false;

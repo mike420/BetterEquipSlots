@@ -30,6 +30,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Other players see your style even if they don't have the mod.
 [*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour (per worn piece), armour set bonuses, block, resistances, active food and status effects.
 [*][b]Character preview[/b]: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
+[*][b]Compact panel[/b]: leave out the slots you don't use (Panel → Hidden Slots) or pick a preset (Panel → Preset: Full, Compact, Minimal). A slot with an item in it is always shown.
 [*][b]Movable panel[/b]: drag the panel by its frame to anywhere on screen and it stays there (Panel → Offset).
 [*][b]Controller support[/b]: on the hotbar, D-pad left / right continues onto the quick slots and D-pad up uses the selected one. In the inventory, RB / LB stop on the panel; use the D-pad to move, A / X / LT / RT work as they do in the inventory, and the right stick switches tabs.
 [*][b]Loadouts[/b]: four saved sets of worn gear and quick slot items. Left click a button under your character on the Equipment tab to put a loadout on, right click to save what you wear now to it. Each also has a key (Keypad 1 to Keypad 4 by default; hold Left Shift with it to save). A loadout also remembers your weapon and shield, so it swaps weapon sets too. Items are found in your inventory by kind, preferring the same quality and the best repair; slots the loadout leaves empty are emptied, and missing items are reported.
@@ -44,7 +45,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [size=5][b]Works with[/b][/size]
 
 [list]
-[*]Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), Einherjar Bodies (shows your Einherjar body on the character preview), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
+[*]Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), Einherjar Bodies (shows your Einherjar body on the character preview), Jewelcrafting (its rings go in the Ring slot, its necklaces in the Amulet slot), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
 [/list]
 
 
@@ -59,7 +60,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Loadouts[/b]: [b]Enable Loadouts[/b] (on), [b]Save Modifier[/b] (Left Shift), [b]Key 1[/b] to [b]Key 4[/b] (Keypad 1 to 4), [b]Include Weapons[/b] (on).
 [*][b]Durability[/b]: [b]Warn Below[/b] (20 percent, 0 is off), [b]Repair All At Once[/b] (on).
 [*][b]Inventory[/b]: [b]Cell Locks[/b] (on; enables the padlocks).
-[*][b]Panel[/b]: [b]Offset[/b], [b]Show Character[/b] (on), [b]Keep Worn In Inventory[/b] (off), [b]Show On Key[/b] (off), [b]Key[/b] (U).
+[*][b]Panel[/b]: [b]Offset[/b], [b]Show Character[/b] (on), [b]Hidden Slots[/b] (none), [b]Preset[/b] (Custom), [b]Keep Worn In Inventory[/b] (off), [b]Show On Key[/b] (off), [b]Key[/b] (U).
 [*][b]Utility[/b]: [b]Multiple Utility Items[/b] (on; allows wearing several and shows their window), [b]Max Utility Items[/b] (5, minimum 2). Both are set by the server.
 [*][b]Jewelry[/b]: [b]Rings[/b], [b]Earrings[/b], [b]Amulets[/b]: the item prefab names that go in those slots. Set by the server.
 [/list]

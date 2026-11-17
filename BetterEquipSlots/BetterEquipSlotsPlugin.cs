@@ -20,6 +20,7 @@ namespace BetterEquipSlots;
 [BepInDependency("randyknapp.mods.epicloot", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("cdev.sleepingplayers", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("MagicMike.EinherjarBodies", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("org.bepinex.plugins.jewelcrafting", BepInDependency.DependencyFlags.SoftDependency)]
 [NetworkCompatibility(CompatibilityLevel.ClientMustHaveMod, VersionStrictness.Minor)]
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
@@ -91,6 +92,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		MainConfig.showKeyConflicts.SettingChanged += (_, _) => KeyConflicts.Recheck();
 		MainConfig.showOnKey.SettingChanged += (_, _) => KeyConflicts.Recheck();
 		MainConfig.panelKey.SettingChanged += (_, _) => KeyConflicts.Recheck();
+		SlotVisibility.Setup();
 		MainConfig.rings.SettingChanged += (_, _) => Jewelry.ReloadConfig();
 		MainConfig.earrings.SettingChanged += (_, _) => Jewelry.ReloadConfig();
 		MainConfig.amulets.SettingChanged += (_, _) => Jewelry.ReloadConfig();
@@ -116,6 +118,7 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		{
 			MultiUtility.SwitchOffOldMod();
 			BackpackHost.Setup();
+			JewelcraftingHost.Setup();
 		}
 	}
 

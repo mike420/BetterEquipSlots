@@ -235,6 +235,7 @@ internal static class Translations
 			}
 			localization.AddTranslation(language.Key, dictionary);
 		}
+		Texts.Register(localization);
 		AddToLoadedLanguage();
 	}
 
@@ -243,6 +244,7 @@ internal static class Translations
 		Localization instance = Localization.m_instance;
 		if (instance != null)
 		{
+			Texts.AddToLoadedLanguage(instance);
 			if (!Languages.TryGetValue(instance.GetSelectedLanguage(), out var value) || value.Length != Keys.Length)
 			{
 				value = Languages["English"];

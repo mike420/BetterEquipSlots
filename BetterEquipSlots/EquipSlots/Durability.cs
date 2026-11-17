@@ -48,7 +48,7 @@ internal static class Durability
 			{
 				if (Warned.Add(item))
 				{
-					player.Message(MessageHud.MessageType.TopLeft, Localization.instance.Localize(item.m_shared.m_name) + " is nearly broken (" + Mathf.RoundToInt(item.GetDurabilityPercentage() * 100f) + "%)");
+					player.Message(MessageHud.MessageType.TopLeft, Texts.Get(Texts.DurabilityLow, Localization.instance.Localize(item.m_shared.m_name), Mathf.RoundToInt(item.GetDurabilityPercentage() * 100f).ToString()));
 				}
 			}
 			else if (item.GetDurabilityPercentage() > Threshold + 0.1f)

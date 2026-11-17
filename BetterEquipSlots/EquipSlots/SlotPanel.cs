@@ -45,6 +45,8 @@ internal static class SlotPanel
 
 	private static readonly Button[] s_loadoutButtons = new Button[Loadouts.Count];
 
+	private static readonly string[] s_loadoutState = new string[Loadouts.Count];
+
 	private static RectTransform s_root;
 
 	private static RectTransform s_cellsRoot;
@@ -274,6 +276,7 @@ internal static class SlotPanel
 		for (int i = 0; i < s_loadoutButtons.Length; i++)
 		{
 			s_loadoutButtons[i] = null;
+			s_loadoutState[i] = null;
 		}
 		Cells.Clear();
 		CellPositions.Clear();
@@ -1062,15 +1065,17 @@ internal static class SlotPanel
 
 	private static void BuildSheet(Inventory inventory)
 	{
-		bool flag = Jewelry.AnyKnown || HoldsJewelry(inventory);
+		bool flag = Jewelry.AnyKnown || JewelcraftingHost.Active || HoldsJewelry(inventory);
 		bool backpack = BackpackHost.Active || SlotInventory.ItemIn(inventory, SlotLayout.Backpack) != null;
 		(SlotKind, int)[] array = (flag ? LeftWithJewelry : LeftPlain);
 		(SlotKind, int)[] array2 = (flag ? (backpack ? RightWithJewelryAndBackpack : RightWithJewelry) : (backpack ? RightPlainWithBackpack : RightPlain));
-		s_sheetRows = Mathf.Max(array.Length, array2.Length);
+		array = SlotVisibility.Filter(array, inventory);
+		array2 = SlotVisibility.Filter(array2, inventory);
+		s_sheetRows = Mathf.Max(1, Mathf.Max(array.Length, array2.Length));
 		Sheet.Clear();
 		SheetPlaces.Clear();
-		AddColumn(array, 0f, spread: true);
-		AddColumn(array2, 4f, spread: flag);
+		AddColumn(array, 0f, spread: array.Length >= 4);
+		AddColumn(array2, 4f, spread: flag && array2.Length >= 5);
 		if (LookMode)
 		{
 			for (int i = 0; i < Sheet.Count; i++)
@@ -1569,7 +1574,7 @@ internal static class SlotPanel
 
 	private static Button LoadoutButton(InventoryGui gui, int number, UITooltip tooltipTemplate)
 	{
-		Button button = Tab(gui, "Loadout" + number, "Loadout " + number, PanelTab.Equipment, tooltipTemplate, null);
+		Button button = Tab(gui, "Loadout" + number, Texts.Get(Texts.Loadout, number.ToString()), PanelTab.Equipment, tooltipTemplate, null);
 		button.onClick = new Button.ButtonClickedEvent();
 		button.onClick.AddListener(() =>
 		{
@@ -1620,7 +1625,7 @@ internal static class SlotPanel
 		for (int j = 0; j < s_loadoutButtons.Length; j++)
 		{
 			Place(s_loadoutButtons[j], PadLeft + j * (each + 6f), y + 2f, each);
-			Label(s_loadoutButtons[j], "Loadout " + (j + 1));
+			Label(s_loadoutButtons[j], Texts.Get(Texts.Loadout, (j + 1).ToString()));
 		}
 		return 34f;
 	}
@@ -1637,6 +1642,12 @@ internal static class SlotPanel
 			}
 			int number = i + 1;
 			bool exists = Loadouts.Exists(player, number);
+			string state = exists + "|" + Localization.instance.GetSelectedLanguage();
+			if (s_loadoutState[i] == state)
+			{
+				continue;
+			}
+			s_loadoutState[i] = state;
 			TMP_Text text = button.GetComponentInChildren<TMP_Text>(includeInactive: true);
 			if (text != null)
 			{
@@ -1645,9 +1656,9 @@ internal static class SlotPanel
 			UITooltip tooltip = button.GetComponent<UITooltip>();
 			if (tooltip != null)
 			{
-				tooltip.m_topic = "Loadout " + number;
+				tooltip.m_topic = Texts.Get(Texts.Loadout, number.ToString());
 				string key = QuickSlots.Label(MainConfig.LoadoutKey(number));
-				tooltip.m_text = (exists ? "Left click: put it on.\n" : "Empty.\n") + "Right click: save what you wear and the quick slots now.\nKey: " + key + ", with " + QuickSlots.Label(MainConfig.loadoutSave.Value) + " to save.";
+				tooltip.m_text = Texts.Get(exists ? Texts.LoadoutTipUse : Texts.LoadoutTipEmpty) + "\n" + Texts.Get(Texts.LoadoutTipSave) + "\n" + Texts.Get(Texts.LoadoutTipKey, key, QuickSlots.Label(MainConfig.loadoutSave.Value));
 			}
 		}
 	}
