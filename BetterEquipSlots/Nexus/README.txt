@@ -1,6 +1,6 @@
 [size=6][b]Better Equip Slots[/b][/size]
 
-Adds a character sheet next to your inventory, with dedicated armour slots, six quick slots, a style tab for your gear and your stats at a glance. Worn armour stops taking up space in your backpack, and everything works with a controller.
+Adds a character sheet next to your inventory, with dedicated armour slots, six quick slots, loadouts, a food bag, a style tab for your gear and your stats at a glance. Worn armour stops taking up space in your backpack, and everything works with a controller.
 
 
 [size=5][b]Donations[/b][/size]
