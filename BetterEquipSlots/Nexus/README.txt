@@ -27,7 +27,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Equipment slots[/b]: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item into a slot to wear it, or drag it out to take it off. Right-clicking also equips and unequips.
 [*][b]Multiple utility items[/b]: wear up to 5 belts and similar items at once (no two of the same kind). Each gets its own cell in a window beside the belt slot, and all of their stats and effects apply. This is built in from Equip Multiple Utility Items, so you can remove that mod; your settings from it carry over.
 [*][b]Six quick slots[/b]: hold anything and bind each slot to any key or key combination ([b]Z[/b], [b]V[/b], [b]B[/b] by default, plus the same keys with [b]Left Alt[/b]). They appear on the HUD next to the Forsaken power, with the stack size (when a stack runs out the next one from your inventory takes its place), and a potion that can't be used yet is dimmed with the time left over it.
-[*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Other players see your style even if they don't have the mod.
+[*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Four buttons under the character save a style and put it back whatever gear you wear (left click uses it, right click saves the current one; with a controller, A and X). Other players see your style even if they don't have the mod.
 [*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour (per worn piece), armour set bonuses, block, resistances, active food and status effects.
 [*][b]Character preview[/b]: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
 [*][b]Compact panel[/b]: leave out the slots you don't use (Panel → Hidden Slots) or pick a preset (Panel → Preset: Full, Compact, Minimal). A slot with an item in it is always shown.
@@ -57,7 +57,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Quick Slots[/b]: [b]Auto Refill[/b] (on), [b]Key 1[/b] to [b]Key 6[/b], [b]Alt Modifier[/b] (Left Alt: the HUD shows slots 4-6 while held), [b]Keys Win Over Vanilla[/b] (off), [b]Show Key Conflicts[/b] (on), [b]Gamepad Hotbar[/b] (on).
 [*][b]HUD[/b]: [b]Show Quick Slots[/b] (on), [b]Offset[/b], [b]Spacing[/b] (8), [b]Show Cooldown[/b] (on).
 [*][b]Ammo[/b]: [b]Show On Hotbar[/b] (on), [b]Auto Equip[/b] (on).
-[*][b]Loadouts[/b]: [b]Enable Loadouts[/b] (on), [b]Save Modifier[/b] (Left Shift), [b]Key 1[/b] to [b]Key 4[/b] (Keypad 1 to 4), [b]Include Weapons[/b] (on).
+[*][b]Loadouts[/b]: [b]Enable Loadouts[/b] (on), [b]Save Modifier[/b] (Left Shift), [b]Key 1[/b] to [b]Key 4[/b] (Keypad 1 to 4), [b]Include Weapons[/b] (on), [b]Include Style[/b] (off).
 [*][b]Durability[/b]: [b]Warn Below[/b] (20 percent, 0 is off), [b]Repair All At Once[/b] (on).
 [*][b]Inventory[/b]: [b]Cell Locks[/b] (on; enables the padlocks).
 [*][b]Panel[/b]: [b]Offset[/b], [b]Show Character[/b] (on), [b]Hidden Slots[/b] (none), [b]Preset[/b] (Custom), [b]Keep Worn In Inventory[/b] (off), [b]Show On Key[/b] (off), [b]Key[/b] (U).

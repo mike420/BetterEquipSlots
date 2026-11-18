@@ -1597,13 +1597,26 @@ internal static class SlotPanel
 		return component;
 	}
 
+	/// <summary>A click on one of the row of buttons: a loadout on the Equipment tab, a saved style on the Style tab.</summary>
+	internal static void PresetClick(int number, bool save)
+	{
+		if (LookMode)
+		{
+			LookPresets.OnPanelClick(number, save);
+		}
+		else
+		{
+			Loadouts.OnPanelClick(number, save);
+		}
+	}
+
 	private static Button LoadoutButton(InventoryGui gui, int number, UITooltip tooltipTemplate)
 	{
 		Button button = Tab(gui, "Loadout" + number, Texts.Get(Texts.Loadout, number.ToString()), PanelTab.Equipment, tooltipTemplate, null);
 		button.onClick = new Button.ButtonClickedEvent();
 		button.onClick.AddListener(() =>
 		{
-			Loadouts.OnPanelClick(number, save: false);
+			PresetClick(number, save: false);
 		});
 		button.gameObject.AddComponent<LoadoutRightClick>().Number = number;
 		button.interactable = true;
@@ -1625,7 +1638,7 @@ internal static class SlotPanel
 		{
 			if (eventData.button == UnityEngine.EventSystems.PointerEventData.InputButton.Right)
 			{
-				Loadouts.OnPanelClick(Number, save: true);
+				PresetClick(Number, save: true);
 			}
 		}
 	}
@@ -1633,7 +1646,7 @@ internal static class SlotPanel
 	// The row of loadout buttons under the slots (Equipment tab only); returns the height it takes
 	private static float PlaceLoadouts(float y, float windowWidth)
 	{
-		bool show = s_tab == PanelTab.Equipment && MainConfig.loadoutsEnabled.Value && s_loadoutButtons[0] != null;
+		bool show = (s_tab == PanelTab.Equipment || s_tab == PanelTab.Style) && MainConfig.loadoutsEnabled.Value && s_loadoutButtons[0] != null;
 		for (int i = 0; i < s_loadoutButtons.Length; i++)
 		{
 			if (s_loadoutButtons[i] != null)
@@ -1653,7 +1666,7 @@ internal static class SlotPanel
 		{
 			Place(s_loadoutButtons[j], PadLeft + j * (each + 6f), y + 2f, each);
 			s_loadoutCenters[j] = new Vector2(PadLeft + j * (each + 6f) + each * 0.5f, y + 2f + 14f);
-			Label(s_loadoutButtons[j], Texts.Get(Texts.Loadout, (j + 1).ToString()));
+			Label(s_loadoutButtons[j], Texts.Get(LookMode ? Texts.Style : Texts.Loadout, (j + 1).ToString()));
 		}
 		return 34f;
 	}
@@ -1669,8 +1682,9 @@ internal static class SlotPanel
 				continue;
 			}
 			int number = i + 1;
-			bool exists = Loadouts.Exists(player, number);
-			string state = exists + "|" + Localization.instance.GetSelectedLanguage();
+			bool style = LookMode;
+			bool exists = style ? LookPresets.Exists(player, number) : Loadouts.Exists(player, number);
+			string state = exists + "|" + style + "|" + Localization.instance.GetSelectedLanguage();
 			if (s_loadoutState[i] == state)
 			{
 				continue;
@@ -1684,9 +1698,9 @@ internal static class SlotPanel
 			UITooltip tooltip = button.GetComponent<UITooltip>();
 			if (tooltip != null)
 			{
-				tooltip.m_topic = Texts.Get(Texts.Loadout, number.ToString());
+				tooltip.m_topic = Texts.Get(style ? Texts.Style : Texts.Loadout, number.ToString());
 				string key = QuickSlots.Label(MainConfig.LoadoutKey(number));
-				tooltip.m_text = Texts.Get(exists ? Texts.LoadoutTipUse : Texts.LoadoutTipEmpty) + "\n" + Texts.Get(Texts.LoadoutTipSave) + "\n" + Texts.Get(Texts.LoadoutTipKey, key, QuickSlots.Label(MainConfig.loadoutSave.Value));
+				tooltip.m_text = style ? (Texts.Get(exists ? Texts.StyleTipUse : Texts.LoadoutTipEmpty) + "\n" + Texts.Get(Texts.StyleTipSave)) : Texts.Get(exists ? Texts.LoadoutTipUse : Texts.LoadoutTipEmpty) + "\n" + Texts.Get(Texts.LoadoutTipSave) + "\n" + Texts.Get(Texts.LoadoutTipKey, key, QuickSlots.Label(MainConfig.loadoutSave.Value));
 			}
 		}
 	}

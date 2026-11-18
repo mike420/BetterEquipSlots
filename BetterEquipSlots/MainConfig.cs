@@ -52,6 +52,7 @@ internal static class MainConfig
 	public static ConfigEntry<int> durabilityWarn;
 	public static ConfigEntry<bool> repairAll;
 	public static ConfigEntry<bool> loadoutWeapons;
+	public static ConfigEntry<bool> loadoutStyle;
 
 	public static ConfigEntry<bool> multiUtility;
 	public static ConfigEntry<int> maxUtilityItems;
@@ -122,6 +123,8 @@ internal static class MainConfig
 		loadout4 = config.BindConfigInOrder("Loadouts", "Key 4", defaultValue: new KeyboardShortcut(KeyCode.Keypad4), "Puts on loadout 4." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
 
 		loadoutWeapons = config.BindConfigInOrder("Loadouts", "Include Weapons", defaultValue: true, "A loadout also remembers what is in your hands (weapon, shield, tool), so it swaps weapon sets too. A loadout saved with empty hands unequips them. Off: loadouts leave your hands alone.", synced: false, sectionOrder: true, settingOrder: true);
+
+		loadoutStyle = config.BindConfigInOrder("Loadouts", "Include Style", defaultValue: false, "A loadout also remembers the style (how your helmet, chest, legs and cape look, set on the Style tab) and puts it back with the gear. Off: a loadout leaves your style alone. It applies to loadouts saved while it is on.", synced: false, sectionOrder: true, settingOrder: true);
 
 		durabilityWarn = config.BindConfigInOrder("Durability", "Warn Below", defaultValue: 20, "Worn gear at or below this durability (percent) gets a red tint on the equipment panel, and a message warns once when it drops there. 0: off.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(0, 100));
 		repairAll = config.BindConfigInOrder("Durability", "Repair All At Once", defaultValue: true, "At a workbench the repair button repairs every item that can be repaired, not just one per press.", synced: false, sectionOrder: true, settingOrder: true);

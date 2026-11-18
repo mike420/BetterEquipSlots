@@ -49,6 +49,32 @@ internal static class Appearance
 		return gameObject2 ?? gameObject;
 	}
 
+	// The whole look as it is saved ("helmet|chest|legs|cape", empty: none chosen), and put back
+	internal static string Snapshot(Player player)
+	{
+		return (player?.m_customData != null && player.m_customData.TryGetValue(Key, out var value)) ? value : "";
+	}
+
+	internal static void Restore(Player player, string value)
+	{
+		if (player?.m_customData == null)
+		{
+			return;
+		}
+		if (string.IsNullOrEmpty(value) || value.Replace("|", "").Length == 0)
+		{
+			player.m_customData.Remove(Key);
+		}
+		else
+		{
+			player.m_customData[Key] = value;
+		}
+		if (((Humanoid)player).m_visEquipment != null)
+		{
+			((Humanoid)player).SetupVisEquipment(((Humanoid)player).m_visEquipment, false);
+		}
+	}
+
 	internal static bool IsHidden(Player player, int index)
 	{
 		return ChosenName(player, index) == "-";

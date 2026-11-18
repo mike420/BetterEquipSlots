@@ -258,11 +258,11 @@ internal static class GamepadPanel
 			int loadout = Cursor - cellCount + 1;
 			if (ZInput.GetButtonDown("JoyButtonA"))
 			{
-				Loadouts.OnPanelClick(loadout, save: false);
+				SlotPanel.PresetClick(loadout, save: false);
 			}
 			else if (ZInput.GetButtonDown("JoyButtonX"))
 			{
-				Loadouts.OnPanelClick(loadout, save: true);
+				SlotPanel.PresetClick(loadout, save: true);
 			}
 			return;
 		}

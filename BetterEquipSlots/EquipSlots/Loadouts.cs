@@ -23,6 +23,9 @@ internal static class Loadouts
 
 	private const int LeftHand = 1001;
 
+	// The style (how the helmet, chest, legs and cape look), kept in the entry's prefab field
+	private const int Style = 1002;
+
 	private struct Entry
 	{
 		internal int Cell;
@@ -79,7 +82,7 @@ internal static class Loadouts
 		for (int i = 1; i < parts.Length; i++)
 		{
 			string[] f = parts[i].Split(':');
-			if (f.Length == 3 && int.TryParse(f[0], out int cell) && int.TryParse(f[2], out int quality) && cell >= 0 && (cell < SlotLayout.All.Count || cell == RightHand || cell == LeftHand))
+			if (f.Length == 3 && int.TryParse(f[0], out int cell) && int.TryParse(f[2], out int quality) && cell >= 0 && (cell < SlotLayout.All.Count || cell == RightHand || cell == LeftHand || cell == Style))
 			{
 				list.Add(new Entry { Cell = cell, Prefab = f[1], Quality = quality });
 			}
@@ -101,6 +104,10 @@ internal static class Loadouts
 				sb.Append(';').Append(cell.Index).Append(':').Append(prefab).Append(':').Append(item.m_quality);
 				saved++;
 			}
+		}
+		if (MainConfig.loadoutStyle.Value)
+		{
+			sb.Append(';').Append(Style).Append(':').Append(Appearance.Snapshot(player)).Append(":0");
 		}
 		if (MainConfig.loadoutWeapons.Value)
 		{
@@ -181,6 +188,7 @@ internal static class Loadouts
 		Dictionary<SlotCell, Entry> wanted = new Dictionary<SlotCell, Entry>();
 		Entry? rightHand = null;
 		Entry? leftHand = null;
+		string style = null;
 		foreach (Entry entry in Read(player, number))
 		{
 			if (entry.Cell == RightHand)
@@ -191,6 +199,11 @@ internal static class Loadouts
 			if (entry.Cell == LeftHand)
 			{
 				leftHand = entry;
+				continue;
+			}
+			if (entry.Cell == Style)
+			{
+				style = entry.Prefab;
 				continue;
 			}
 			SlotCell cell = SlotLayout.All[entry.Cell];
@@ -286,6 +299,10 @@ internal static class Loadouts
 		if (MainConfig.loadoutWeapons.Value && player.m_customData[StoreKey(number)].StartsWith("v2"))
 		{
 			missing += ApplyHands(player, items, taken, rightHand, leftHand);
+		}
+		if (style != null && MainConfig.loadoutStyle.Value)
+		{
+			Appearance.Restore(player, style);
 		}
 		inventory.Changed(false, false);
 		EquipSync.MarkDirty();
