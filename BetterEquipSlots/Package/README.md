@@ -27,6 +27,7 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
   * **Equipment slots**: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item into a slot to wear it, or drag it out to take it off. Right-clicking also equips and unequips.
   * **Multiple utility items**: wear up to 5 belts and similar items at once (no two of the same kind). Each gets its own cell in a window beside the belt slot, and all of their stats and effects apply. This is built in from Equip Multiple Utility Items, so you can remove that mod; your settings from it carry over.
   * **Six quick slots**: hold anything and bind each slot to any key or key combination (`Z`, `V`, `B` by default, plus the same keys with `Left Alt`). They appear on the HUD next to the Forsaken power, with the stack size (when a stack runs out the next one from your inventory takes its place), and a potion that can't be used yet is dimmed with the time left over it.
+  * **Food bag**: a Food section on the Equipment tab with slots (3 by default, up to 6) that take only food. Auto Eat keeps you fed from it: a free food slot is filled, and a food about to run out is eaten again, or another food from the bag. `Left Alt + F` eats from the bag right now. It uses the game's own eating, so a food can be eaten again only after half of its time.
   * **Style tab**: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Four buttons under the character save a style and put it back whatever gear you wear (left click uses it, right click saves the current one; with a controller, A and X). Other players see your style even if they don't have the mod.
   * **Info tab**: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour (per worn piece), armour set bonuses, block, resistances, active food and status effects.
   * **Character preview**: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
@@ -52,10 +53,11 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
 
   * Change settings in game (with Configuration Manager or the mod settings menu, F7) or by editing `MagicMike.BetterEquipSlots.cfg`. Defaults are shown in brackets.
   * **General Settings**: **Enable Plugin** (on; local, needs a restart).
-  * **Quick Slots**: **Auto Refill** (on), **Key 1** to **Key 6**, **Alt Modifier** (Left Alt: the HUD shows slots 4-6 while held), **Keys Win Over Vanilla** (off), **Show Key Conflicts** (on), **Gamepad Hotbar** (on).
+  * **Quick Slots**: **Auto Refill** (on), **Key 1** to **Key 6**, **Alt Modifier** (Left Alt: the HUD shows slots 4-6 while held), **Keys Win Over Vanilla** (off), **Gamepad Hotbar** (on).
   * **HUD**: **Show Quick Slots** (on), **Offset**, **Spacing** (8), **Show Cooldown** (on).
   * **Ammo**: **Show On Hotbar** (on), **Auto Equip** (on).
   * **Loadouts**: **Enable Loadouts** (on), **Save Modifier** (Left Shift), **Key 1** to **Key 4** (Keypad 1 to 4), **Include Weapons** (on), **Include Style** (off).
+  * **Food Bag**: **Slots** (3, 0 to 6; 0 is no food bag), **Auto Eat** (on), **Refresh Below** (5 percent, 0 is only when a food has run out), **Use Another Food** (on), **Eat Key** (Left Alt + F), **Messages** (on).
   * **Durability**: **Warn Below** (20 percent, 0 is off), **Repair All At Once** (on).
   * **Inventory**: **Cell Locks** (on; enables the padlocks).
   * **Panel**: **Offset**, **Show Character** (on), **Hidden Slots** (none), **Preset** (Custom), **Keep Worn In Inventory** (off), **Show On Key** (off), **Key** (U).
@@ -105,7 +107,6 @@ If you downloaded from Nexus, install manually.
   * <a href="https://valheim.hexium.gg/mods/MagicMike/ChestPreview">Chest Preview</a>
   * <a href="https://valheim.hexium.gg/mods/MagicMike/YabbaDabbaDoo">YabbaDabbaDoo</a>
   * <a href="https://valheim.hexium.gg/mods/MagicMike/BetterBuildMenu">Better Build Menu</a>
-  * <a href="https://valheim.hexium.gg/mods/MagicMike/BetterCrafting">Better Crafting</a>
   * <a href="https://valheim.hexium.gg/mods/MagicMike/BetterEquipSlots">Better Equip Slots</a>
   * <a href="https://valheim.hexium.gg/mods/MagicMike/ExtraInventorySlots">Extra Inventory Slots</a>
   * <a href="https://valheim.hexium.gg/mods/MagicMike/VillagePlebs">Village Plebs</a>

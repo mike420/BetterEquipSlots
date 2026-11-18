@@ -18,5 +18,6 @@ internal enum SlotKind
 	Stash,
 	Look,
 	// Last, so the kinds before it keep their numbers
-	Backpack
+	Backpack,
+	Food
 }

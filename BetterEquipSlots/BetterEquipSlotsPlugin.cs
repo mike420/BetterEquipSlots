@@ -90,10 +90,8 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 			};
 		}
 		MainConfig.keepWornInInventory.SettingChanged += (_, _) => EquipSync.MarkDirty();
-		MainConfig.showKeyConflicts.SettingChanged += (_, _) => KeyConflicts.Recheck();
-		MainConfig.showOnKey.SettingChanged += (_, _) => KeyConflicts.Recheck();
-		MainConfig.panelKey.SettingChanged += (_, _) => KeyConflicts.Recheck();
 		SlotVisibility.Setup();
+		FoodBag.Setup();
 		MainConfig.rings.SettingChanged += (_, _) => Jewelry.ReloadConfig();
 		MainConfig.earrings.SettingChanged += (_, _) => Jewelry.ReloadConfig();
 		MainConfig.amulets.SettingChanged += (_, _) => Jewelry.ReloadConfig();
@@ -146,11 +144,11 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		{
 			QuickSlots.Tick();
 			Loadouts.Tick();
+			FoodBag.Tick();
 			SlotPanel.TickKey();
 			AmmoRefill.Tick();
 			QuickRefill.Tick();
 			Durability.Tick();
-			KeyConflicts.Tick();
 			EquipSync.Tick();
 			QuickBar.Tick();
 			PlayerPreview.Tick();
@@ -176,7 +174,6 @@ public class BetterEquipSlotsPlugin : BaseUnityPlugin
 		harmony?.UnpatchSelf();
 		SlotPanel.Destroy();
 		QuickBar.Destroy();
-		KeyConflicts.Destroy();
 		HotbarAmmo.Destroy();
 		PlayerPreview.Destroy();
 	}

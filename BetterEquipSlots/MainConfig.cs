@@ -20,7 +20,6 @@ internal static class MainConfig
 	public static ConfigEntry<KeyboardShortcut> quick6;
 	public static ConfigEntry<KeyboardShortcut> altModifier;
 	public static ConfigEntry<bool> keysWinOverVanilla;
-	public static ConfigEntry<bool> showKeyConflicts;
 	public static ConfigEntry<bool> gamepadHotbar;
 	public static ConfigEntry<bool> quickRefill;
 
@@ -49,6 +48,12 @@ internal static class MainConfig
 	public static ConfigEntry<KeyboardShortcut> loadout3;
 	public static ConfigEntry<KeyboardShortcut> loadout4;
 
+	public static ConfigEntry<int> foodSlots;
+	public static ConfigEntry<bool> foodAutoEat;
+	public static ConfigEntry<int> foodRefreshBelow;
+	public static ConfigEntry<bool> foodUseAnother;
+	public static ConfigEntry<KeyboardShortcut> foodKey;
+	public static ConfigEntry<bool> foodMessages;
 	public static ConfigEntry<int> durabilityWarn;
 	public static ConfigEntry<bool> repairAll;
 	public static ConfigEntry<bool> loadoutWeapons;
@@ -91,7 +96,6 @@ internal static class MainConfig
 		quick6 = config.BindConfigInOrder("Quick Slots", "Key 6", defaultValue: new KeyboardShortcut(KeyCode.B, KeyCode.LeftAlt), "Uses quick slot 6." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
 		altModifier = config.BindConfigInOrder("Quick Slots", "Alt Modifier", defaultValue: new KeyboardShortcut(KeyCode.LeftAlt), "While it is held the HUD shows quick slots 4-6 instead of 1-3. Empty or None: always 1-3.", synced: false, sectionOrder: true, settingOrder: true);
 		keysWinOverVanilla = config.BindConfigInOrder("Quick Slots", "Keys Win Over Vanilla", defaultValue: false, "A quick slot key without modifiers that is also bound to a game action (vanilla: V auto-pickup, 1-8 the hotbar): off - the key does both, and the clash is shown under the hotbar; on - it does only the quick slot. A key with modifiers (Alt+1) never also does the game action.", synced: false, sectionOrder: true, settingOrder: true);
-		showKeyConflicts = config.BindConfigInOrder("Quick Slots", "Show Key Conflicts", defaultValue: true, "Show a note under the hotbar (while the inventory is closed) when a quick slot key or the equipment panel key is also used by something else.", synced: false, sectionOrder: true, settingOrder: true);
 		gamepadHotbar = config.BindConfigInOrder("Quick Slots", "Gamepad Hotbar", defaultValue: true, "With a controller: the hotbar's left / right buttons step on past slot 8 onto the six quick slots, and its use button uses the one selected there.", synced: false, sectionOrder: true, settingOrder: true);
 
 		quickRefill = config.BindConfigInOrder("Quick Slots", "Auto Refill", defaultValue: true, "When the last of a stack in a quick slot is used up, the next stack of the same item from your inventory takes its place, so the key keeps working. Never takes from another slot.", synced: false, sectionOrder: true, settingOrder: true);
@@ -126,6 +130,13 @@ internal static class MainConfig
 
 		loadoutStyle = config.BindConfigInOrder("Loadouts", "Include Style", defaultValue: false, "A loadout also remembers the style (how your helmet, chest, legs and cape look, set on the Style tab) and puts it back with the gear. Off: a loadout leaves your style alone. It applies to loadouts saved while it is on.", synced: false, sectionOrder: true, settingOrder: true);
 
+		foodSlots = config.BindConfigInOrder("Food Bag", "Slots", defaultValue: 3, "How many food bag slots the panel has (0 to 6; 0: no food bag). They take only food, not potions or meads. Empty a slot before removing it.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(0, 6));
+		foodAutoEat = config.BindConfigInOrder("Food Bag", "Auto Eat", defaultValue: true, "Eat from the food bag by itself: when one of your three food slots is free, a food of the bag that you are not eating is eaten; when a food is about to run out (see Refresh Below), it is eaten again if the bag has it. The game still only lets you eat a food again after half of its time.", synced: false, sectionOrder: true, settingOrder: true);
+		foodRefreshBelow = config.BindConfigInOrder("Food Bag", "Refresh Below", defaultValue: 5, "Auto Eat eats a food again when it has less than this percent of its time left. 0: only when a food has run out.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(0, 50));
+		foodUseAnother = config.BindConfigInOrder("Food Bag", "Use Another Food", defaultValue: true, "When a food is about to run out and the bag has no more of it, Auto Eat eats another food of the bag instead.", synced: false, sectionOrder: true, settingOrder: true);
+		foodKey = config.BindConfigInOrder("Food Bag", "Eat Key", defaultValue: new KeyboardShortcut(KeyCode.F, KeyCode.LeftAlt), "Eats from the food bag right now: fills a free food slot, or eats again the food closest to running out." + KeyHelp, synced: false, sectionOrder: true, settingOrder: true);
+		foodMessages = config.BindConfigInOrder("Food Bag", "Messages", defaultValue: true, "Say so when the Eat Key finds nothing to eat in the bag.", synced: false, sectionOrder: true, settingOrder: true);
+
 		durabilityWarn = config.BindConfigInOrder("Durability", "Warn Below", defaultValue: 20, "Worn gear at or below this durability (percent) gets a red tint on the equipment panel, and a message warns once when it drops there. 0: off.", synced: false, sectionOrder: true, settingOrder: true, acceptableValues: new AcceptableValueRange<int>(0, 100));
 		repairAll = config.BindConfigInOrder("Durability", "Repair All At Once", defaultValue: true, "At a workbench the repair button repairs every item that can be repaired, not just one per press.", synced: false, sectionOrder: true, settingOrder: true);
 
@@ -157,7 +168,6 @@ internal static class MainConfig
 		[("QuickSlots", "Key6")] = quick6,
 		[("QuickSlots", "AltModifier")] = altModifier,
 		[("QuickSlots", "KeysWinOverVanilla")] = keysWinOverVanilla,
-		[("QuickSlots", "ShowKeyConflicts")] = showKeyConflicts,
 		[("QuickSlots", "GamepadHotbar")] = gamepadHotbar,
 		[("Hud", "Enabled")] = hudEnabled,
 		[("Hud", "Offset")] = hudOffset,

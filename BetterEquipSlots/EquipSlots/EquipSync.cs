@@ -324,7 +324,7 @@ internal static class EquipSync
 			{
 				return;
 			}
-			if (cell.Kind == SlotKind.Quick || cell.Kind == SlotKind.Quiver)
+			if (cell.Kind == SlotKind.Quick || cell.Kind == SlotKind.Quiver || cell.Kind == SlotKind.Food)
 			{
 				player.UseItem(((Humanoid)player).m_inventory, item, fromInventoryGui: true);
 				return;

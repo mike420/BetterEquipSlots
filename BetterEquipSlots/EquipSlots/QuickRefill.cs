@@ -30,7 +30,7 @@ internal static class QuickRefill
 			return;
 		}
 		SlotCell cell = SlotLayout.At(item.m_gridPos);
-		if (cell != null && cell.Kind == SlotKind.Quick && !inventory.ContainsItem(item))
+		if (cell != null && (cell.Kind == SlotKind.Quick || cell.Kind == SlotKind.Food) && !inventory.ContainsItem(item))
 		{
 			Waiting.Add(new Pending { Cell = cell, Name = item.m_shared.m_name, Quality = item.m_quality });
 		}

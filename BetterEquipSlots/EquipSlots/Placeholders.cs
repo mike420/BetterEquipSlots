@@ -62,6 +62,8 @@ internal static class Placeholders
 			return "ArrowWood";
 		case SlotKind.Backpack:
 			return BackpackHost.PlaceholderPrefab();
+		case SlotKind.Food:
+			return "CookedMeat";
 		default:
 			return null;
 		}
@@ -84,6 +86,7 @@ internal static class Placeholders
 			SlotKind.Quick => "$cdev_es_slot_quick", 
 			SlotKind.Quiver => "$cdev_es_slot_quiver", 
 			SlotKind.Backpack => "$cdev_es_slot_backpack", 
+			SlotKind.Food => Texts.Food, 
 			_ => "$cdev_es_slot_stash", 
 		};
 	}

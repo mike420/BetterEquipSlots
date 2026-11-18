@@ -18,7 +18,6 @@ internal static class ModConfig
 	internal static ConfigEntry<KeyboardShortcut> Quick6 => MainConfig.quick6;
 	internal static ConfigEntry<KeyboardShortcut> AltModifier => MainConfig.altModifier;
 	internal static ConfigEntry<bool> KeysWinOverVanilla => MainConfig.keysWinOverVanilla;
-	internal static ConfigEntry<bool> ShowKeyConflicts => MainConfig.showKeyConflicts;
 	internal static ConfigEntry<bool> GamepadHotbar => MainConfig.gamepadHotbar;
 	internal static ConfigEntry<bool> HudEnabled => MainConfig.hudEnabled;
 	internal static ConfigEntry<Vector2> HudOffset => MainConfig.hudOffset;

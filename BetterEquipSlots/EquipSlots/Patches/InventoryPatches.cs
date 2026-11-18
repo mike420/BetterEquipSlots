@@ -62,7 +62,7 @@ internal static class InventoryPatches
 			return;
 		}
 		SlotCell slotCell = SlotLayout.At(item.m_gridPos);
-		if (slotCell != null && (slotCell.Kind == SlotKind.Quick || slotCell.Kind == SlotKind.Stash))
+		if (slotCell != null && (slotCell.Kind == SlotKind.Quick || slotCell.Kind == SlotKind.Stash || slotCell.Kind == SlotKind.Food))
 		{
 			Vector2i gridPos = SlotInventory.FreeGridCell(__instance, __instance.TopFirst(item));
 			if (gridPos.x >= 0)

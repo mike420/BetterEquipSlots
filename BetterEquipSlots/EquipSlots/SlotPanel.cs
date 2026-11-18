@@ -1063,6 +1063,13 @@ internal static class SlotPanel
 		Wanted.Clear();
 		Wanted.AddRange(Sheet);
 		Wanted.AddRange(SlotLayout.Quick);
+		foreach (SlotCell food in SlotLayout.Food)
+		{
+			if (SlotLayout.IsOpen(food) || SlotInventory.ItemIn(inventory, food) != null)
+			{
+				Wanted.Add(food);
+			}
+		}
 		bool flag = false;
 		foreach (SlotCell item in SlotLayout.Quiver)
 		{
@@ -1241,6 +1248,7 @@ internal static class SlotPanel
 		y += (float)s_sheetRows * s_space;
 		y += PlaceLoadouts(y, num);
 		y = Section(count, SlotKind.Quick, "$cdev_es_quick", y);
+		y = Section(count, SlotKind.Food, Texts.Food, y);
 		int num3 = CountCells(count, IsExtraBeltCell);
 		float top = ((num3 > 0) ? (SideWindowHeight(num3) + 8f) : 0f);
 		SideWindow(s_quiverWindow, count, num, onLeft: false, top, "$cdev_es_quiver", IsQuiverCell);
@@ -1899,7 +1907,7 @@ internal static class SlotPanel
 			return;
 		}
 		InventoryGui instance = InventoryGui.instance;
-		if (instance != null && (instance.m_dragGo != null || slotCell.Kind == SlotKind.Quick || slotCell.Kind == SlotKind.Quiver))
+		if (instance != null && (instance.m_dragGo != null || slotCell.Kind == SlotKind.Quick || slotCell.Kind == SlotKind.Quiver || slotCell.Kind == SlotKind.Food))
 		{
 			instance.OnRightClickItem(grid, item, pos);
 		}

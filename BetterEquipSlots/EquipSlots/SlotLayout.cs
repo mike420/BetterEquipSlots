@@ -38,6 +38,9 @@ internal static class SlotLayout
 
 	internal static readonly List<SlotCell> Look;
 
+	// The food bag: six cells in the last row of the "did not fit" rows (its first six cells), of which the first few are open
+	internal static readonly List<SlotCell> Food;
+
 	// The backpack of Backpacks or Advanced Backpacks; in row 22 beside the quick slots, and added last so the cells before it
 	// keep their indexes (saved with the items)
 	internal static readonly SlotCell Backpack;
@@ -53,6 +56,7 @@ internal static class SlotLayout
 		Stash = new List<SlotCell>();
 		ExtraBelt = new List<SlotCell>();
 		Look = new List<SlotCell>();
+		Food = new List<SlotCell>();
 		ByPos = new SlotCell[8, 12];
 		Add(SlotKind.Helmet, 0, 0, 20);
 		Add(SlotKind.Chest, 0, 1, 20);
@@ -83,7 +87,14 @@ internal static class SlotLayout
 		{
 			for (int m = 0; m < 8; m++)
 			{
-				Add(SlotKind.Stash, num++, m, l);
+				if (l == 31 && m < 6)
+				{
+					Add(SlotKind.Food, m, m, l);
+				}
+				else
+				{
+					Add(SlotKind.Stash, num++, m, l);
+				}
 			}
 		}
 		for (int n = 0; n < 4; n++)
@@ -115,6 +126,9 @@ internal static class SlotLayout
 			case SlotKind.Look:
 				Look.Add(slotCell);
 				break;
+			case SlotKind.Food:
+				Food.Add(slotCell);
+				break;
 			default:
 				Stash.Add(slotCell);
 				break;
@@ -128,6 +142,10 @@ internal static class SlotLayout
 		if (cell.Kind == SlotKind.Belt && cell.Ordinal != 0)
 		{
 			return cell.Ordinal <= MultiUtility.ExtraCells;
+		}
+		if (cell.Kind == SlotKind.Food)
+		{
+			return cell.Ordinal < FoodBag.Slots;
 		}
 		return true;
 	}
@@ -245,6 +263,8 @@ internal static class SlotLayout
 			return false;
 		case SlotKind.Look:
 			return false;
+		case SlotKind.Food:
+			return IsOpen(cell) && FoodBag.IsFood(item);
 		case SlotKind.Ammo:
 			return HomeKind(item) == SlotKind.Ammo;
 		default:
