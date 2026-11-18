@@ -11,6 +11,7 @@
     <td>
     <ul>
       <li>Added a food bag: a Food section on the Equipment tab with 3 slots (0 to 6, Food Bag → Slots) that take only food, not potions or meads. Auto Eat keeps you fed from it: when one of your three food slots is free, a food of the bag that you are not eating is eaten, and a food about to run out (below 5% of its time) is eaten again if the bag has it, else another food from the bag. Left Alt + F eats from the bag right now. It uses the game's own eating, so a food can still be eaten again only after half of its time. When a food in the bag runs out, the next stack of it from your inventory takes its place (Quick Slots → Auto Refill). New Food Bag settings: Slots, Auto Eat, Refresh Below, Use Another Food, Eat Key and Messages. Translated into all of the mod's languages.</li>
+      <li>Added compatibility with Extra Food Slot: with it, the food bag keeps all four food slots fed.</li>
     </ul>
 	</td>
   </tr>

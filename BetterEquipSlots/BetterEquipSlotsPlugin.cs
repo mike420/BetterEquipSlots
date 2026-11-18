@@ -21,6 +21,7 @@ namespace BetterEquipSlots;
 [BepInDependency("cdev.sleepingplayers", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("MagicMike.EinherjarBodies", BepInDependency.DependencyFlags.SoftDependency)]
 [BepInDependency("org.bepinex.plugins.jewelcrafting", BepInDependency.DependencyFlags.SoftDependency)]
+[BepInDependency("nick008.extrafood", BepInDependency.DependencyFlags.SoftDependency)]
 [NetworkCompatibility(CompatibilityLevel.ClientMustHaveMod, VersionStrictness.Minor)]
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {

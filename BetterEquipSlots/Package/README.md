@@ -45,7 +45,7 @@ Thank you for your support, and happy gaming! ⚔️  ...... (A Paypal account i
 
 ## 🤝 Works with:
 
-  * Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), Einherjar Bodies (shows your Einherjar body on the character preview), Jewelcrafting (its rings go in the Ring slot, its necklaces in the Amulet slot), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
+  * Better Archery (quiver goes in the ammo slot), QuickStackStore, Local Craft From Storage Prime, MouseTweaks, Adventure Backpacks, Valheim Plus, BetterUI (quality stars), Epic Loot (rarity colours), Einherjar Bodies (shows your Einherjar body on the character preview), Jewelcrafting (its rings go in the Ring slot, its necklaces in the Amulet slot), Extra Food Slot (the food bag keeps all four food slots fed), and Backpacks and Advanced Backpacks (backpack goes in the Backpack slot).
 
 <br>
 

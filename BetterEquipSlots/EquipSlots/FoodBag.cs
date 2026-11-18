@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using BepInEx.Bootstrap;
 using BepInEx.Configuration;
+using HarmonyLib;
 using UnityEngine;
 
 namespace BetterEquipSlots.EquipSlots;
@@ -11,10 +13,60 @@ namespace BetterEquipSlots.EquipSlots;
 /// </summary>
 internal static class FoodBag
 {
+	private const string ExtraFoodSlotGuid = "nick008.extrafood";
+
 	private static float s_next;
+
+	private static int s_maxFoods;
 
 	// How many bag slots are open (the panel has room for six)
 	internal static int Slots => Mathf.Clamp(MainConfig.foodSlots.Value, 0, 6);
+
+	/// <summary>
+	/// How many foods can be active at once: the game's three, or four with Extra Food Slot, which changes the limit in the
+	/// game's eating (found out the first time it is needed, after every plugin has patched).
+	/// </summary>
+	private static int MaxFoods
+	{
+		get
+		{
+			if (s_maxFoods == 0)
+			{
+				s_maxFoods = FindMaxFoods();
+			}
+			return s_maxFoods;
+		}
+	}
+
+	private static int FindMaxFoods()
+	{
+		int max = Player.m_maxFoods;
+		if (!Chainloader.PluginInfos.ContainsKey(ExtraFoodSlotGuid))
+		{
+			return max;
+		}
+		try
+		{
+			HarmonyLib.Patches patches = Harmony.GetPatchInfo(AccessTools.Method(typeof(Player), "CanEat"));
+			if (patches != null)
+			{
+				foreach (Patch transpiler in patches.Transpilers)
+				{
+					if (transpiler.owner == ExtraFoodSlotGuid)
+					{
+						Plugin.Log.LogInfo("Extra Food Slot: the food bag keeps all four food slots fed.");
+						return max + 1;
+					}
+				}
+			}
+			Plugin.Log.LogWarning("Extra Food Slot is installed but did not patch the game's eating; the food bag uses three food slots.");
+		}
+		catch (System.Exception ex)
+		{
+			Plugin.Log.LogWarning("Could not check Extra Food Slot; the food bag uses three food slots: " + ex.Message);
+		}
+		return max;
+	}
 
 	internal static bool IsFood(ItemDrop.ItemData item)
 	{
@@ -103,7 +155,7 @@ internal static class FoodBag
 		}
 		List<Player.Food> foods = player.GetFoods();
 		ItemDrop.ItemData choice = null;
-		if (foods.Count < Player.m_maxFoods)
+		if (foods.Count < MaxFoods)
 		{
 			choice = NewFood(player, bag, foods);
 		}
