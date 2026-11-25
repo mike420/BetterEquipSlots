@@ -1041,7 +1041,7 @@ internal static class SlotPanel
 			tMP_Text.enableAutoSizing = false;
 			tMP_Text.fontSize = 11f;
 			tMP_Text.textWrappingMode = TextWrappingModes.NoWrap;
-			tMP_Text.SetEllipsisOverflow();
+			tMP_Text.overflowMode = TextOverflowModes.Truncate;
 			tMP_Text.alignment = TextAlignmentOptions.Bottom;
 			tMP_Text.color = SlotNameColor;
 			string text = Localization.instance.Localize(IsExtraBeltCell(cell) ? "$cdev_es_utility" : Placeholders.NameKey(SlotLayout.LookKind(cell)));

@@ -576,7 +576,7 @@ internal static class InfoView
 		tMP_Text.richText = true;
 		tMP_Text.alignment = alignment;
 		tMP_Text.textWrappingMode = TextWrappingModes.NoWrap;
-		tMP_Text.SetEllipsisOverflow();
+		tMP_Text.overflowMode = TextOverflowModes.Truncate;
 		RectTransform rectTransform = tMP_Text.rectTransform;
 		rectTransform.anchorMin = Vector2.zero;
 		rectTransform.anchorMax = Vector2.one;
