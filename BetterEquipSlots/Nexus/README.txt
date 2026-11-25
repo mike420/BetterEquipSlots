@@ -1,3 +1,5 @@
+[img]https://imgup.uk/i/RlDzGrHb.png[/img]
+
 [size=6][b]Better Equip Slots[/b][/size]
 
 Adds a character sheet next to your inventory, with dedicated armour slots, six quick slots, loadouts, a food bag, a style tab for your gear and your stats at a glance. Worn armour stops taking up space in your backpack, and everything works with a controller.
@@ -27,7 +29,7 @@ Thank you for your support, and happy gaming! ...... (A Paypal account is NOT re
 [*][b]Equipment slots[/b]: helmet, chest, legs, cape, belt, trinket and ammo. Drag an item into a slot to wear it, or drag it out to take it off. Right-clicking also equips and unequips.
 [*][b]Multiple utility items[/b]: wear up to 5 belts and similar items at once (no two of the same kind). Each gets its own cell in a window beside the belt slot, and all of their stats and effects apply. This is built in from Equip Multiple Utility Items, so you can remove that mod; your settings from it carry over.
 [*][b]Six quick slots[/b]: hold anything and bind each slot to any key or key combination ([b]Z[/b], [b]V[/b], [b]B[/b] by default, plus the same keys with [b]Left Alt[/b]). They appear on the HUD next to the Forsaken power, with the stack size (when a stack runs out the next one from your inventory takes its place), and a potion that can't be used yet is dimmed with the time left over it.
-[*][b]Food bag[/b]: a Food section on the Equipment tab with slots (3 by default, up to 6) that take only food. Auto Eat keeps you fed from it: a free food slot is filled, and a food about to run out is eaten again, or another food from the bag. Left Alt + F eats from the bag right now. It uses the game's own eating, so a food can be eaten again only after half of its time.
+[*][b]Food bag[/b]: a Food section on the Equipment tab with slots (3 by default, up to 6) that take only food. Auto Eat keeps you fed from it: a free food slot is filled, and a food about to run out is eaten again, or another food from the bag. [b]Left Alt + F[/b] eats from the bag right now. It uses the game's own eating, so a food can be eaten again only after half of its time.
 [*][b]Style tab[/b]: change how your helmet, chest, legs and cape look, using any piece you have ever picked up, or hide a piece entirely. It is purely cosmetic: no armour, weight or effects change. Four buttons under the character save a style and put it back whatever gear you wear (left click uses it, right click saves the current one; with a controller, A and X). Other players see your style even if they don't have the mod.
 [*][b]Info tab[/b]: health, stamina and eitr with their regeneration, carry weight, your current weapon and its damage, armour (per worn piece), armour set bonuses, block, resistances, active food and status effects.
 [*][b]Character preview[/b]: drag to rotate your character and pan up and down, and use the mouse wheel to zoom. Left-click to swing your weapon, right-click to block.
@@ -110,20 +112,24 @@ If you downloaded from Nexus, install manually.
 [size=5][b]Plugins Created by Magic Mike[/b][/size]
 
 [list]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/CoreWoodExtras]Corewood Extras[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodFortified]Corewood Fortified[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodAdditions]Corewood Additions[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/MyDirtyHoe]My Dirty Hoe[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/ChestPreview]Chest Preview[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/YabbaDabbaDoo]YabbaDabbaDoo[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/AuroraBorealis]Aurora Borealis[/url]
 [*][url=https://valheim.hexium.gg/mods/MagicMike/BetterBuildMenu]Better Build Menu[/url]
 [*][url=https://valheim.hexium.gg/mods/MagicMike/BetterEquipSlots]Better Equip Slots[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/ExtraInventorySlots]Extra Inventory Slots[/url]
-[*][url=https://valheim.hexium.gg/mods/MagicMike/VillagePlebs]Village Plebs[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodAdditions]Corewood Additions[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CoreWoodExtras]Corewood Extras[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/CorewoodFortified]Corewood Fortified[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/ChestPreview]Chest Preview[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/DestroyIt]Destroy It[/url]
 [*][url=https://valheim.hexium.gg/mods/MagicMike/EinherjarBodies]Einherjar Bodies[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/ExtraInventorySlots]Extra Inventory Slots[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/MyDirtyHoe]My Dirty Hoe[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/ValheimSkies]Valheim Skies[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/VanityWardrobe]Vanity Wardrobe[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/VillagePlebs]Village Plebs[/url]
+[*][url=https://valheim.hexium.gg/mods/MagicMike/YabbaDabbaDoo]YabbaDabbaDoo[/url]
 [/list]
 
 
 [size=5][b]Comments/Suggestions/Help[/b][/size]
 
-[url=https://www.nexusmods.com/profile/MagicMikeMods/mods?gameId=3667]Nexus[/url], [url=https://discord.gg/mnr36G6J4x]Discord[/url]
+[url=https://discord.gg/mnr36G6J4x]Discord[/url]

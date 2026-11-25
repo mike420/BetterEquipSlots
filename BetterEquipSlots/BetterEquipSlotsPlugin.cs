@@ -26,7 +26,7 @@ namespace BetterEquipSlots;
 public class BetterEquipSlotsPlugin : BaseUnityPlugin
 {
 	public const string PluginName = "BetterEquipSlots";
-	public const string PluginVersion = "1.0.8";
+	public const string PluginVersion = "1.1.1";
 	public const string PluginAuthor = "MagicMike";
 	internal const string PluginGUID = "MagicMike.BetterEquipSlots";
 	internal const string PluginCopy = "Copyright © MagicMike 2026";
